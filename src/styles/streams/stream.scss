@@ -1,0 +1,58 @@
+.stream {
+  margin: 0 5px 0 0;
+  display: inline-block;
+  position: relative;
+
+  .picture {
+    position: relative;
+    z-index: 10;
+
+    img {
+      z-index: 0;
+    }
+  }
+
+  .streamInfo {
+    color: white;
+    font-size: .85em;
+    position: absolute;
+    bottom: 5px;
+    width: 100%;
+    z-index: 20;
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, .2),
+      rgba(0, 0, 0, .7)
+    );
+
+    .streamInfoContainer {
+      padding: 5px 15px 10px;
+    }
+
+    .status {
+      font-size: 1.2em;
+      font-weight: 600;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+      margin-bottom: .3rem;
+    }
+
+    .status:hover {
+      overflow: auto;
+      white-space: normal;
+    }
+
+    .viewerBar {
+      display: inline;
+
+      .name, .viewers, .game {
+        display: inline;
+      }
+
+      .name {
+        font-style: italic;
+      }
+    }
+  }
+}
