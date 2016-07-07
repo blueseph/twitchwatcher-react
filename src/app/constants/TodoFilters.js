@@ -1,3 +1,3 @@
-export const SHOW_ALL = 'show_all';
-export const SHOW_COMPLETED = 'show_completed';
-export const SHOW_ACTIVE = 'show_active';
+export const FILTER_BY_GAME = 'FILTER_BY_GAME';
+export const FILTER_BY_NAME = 'FILTER_BY_NAME';
+export const REMOVE_FILTER = 'REMOVE_FILTER';
