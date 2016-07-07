@@ -1,12 +1,12 @@
-import * as types from '../../constants/ActionTypes';
-import * as utils from '../../utils/StreamUtils';
+import * as types from '../../constants/RequestTypes';
+import * as utils from '../../utils/TwitchUtils';
 
-export function fetchStreams() {
+export function fetch() {
   return dispatch => {
     dispatch({ type: types.FETCH_STREAMS_REQUEST });
     utils.twitchEndpointFinder(utils.endpoints.streams)
     .then(endpoint => utils.getTwitchData(endpoint))
-    .then(streams => dispatch({ type: types.FETCH_STREAMS_SUCCESS, streams: streams.streams }))
+    .then(streams => dispatch({ type: types.FETCH_STREAMS_SUCCESS, data: streams.streams }))
     .catch(() => dispatch({ type: types.FETCH_STREAMS_FAILURE }));
   };
 }

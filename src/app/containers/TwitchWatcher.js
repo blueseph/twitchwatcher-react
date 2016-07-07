@@ -3,30 +3,48 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { StreamBar } from '../components/streams/StreamBar';
 import * as StreamActions from '../actions/streams/streams';
+import * as FilterActions from '../actions/filters/filters';
+import * as GamesActions from '../actions/games/games';
 
 const TwitchWatcher = ({
+  dispatch,
   actions,
   streams,
-}) => (
+  filters,
+  games,
+}) =>
   <div>
-    <StreamBar actions={actions} {...streams} />
-  </div>
-  );
+    <StreamBar
+      actions={actions}
+      streams={streams}
+      filters={filters}
+      dispatch={dispatch}
+      games={games}
+    />
+  </div>;
 
 TwitchWatcher.propTypes = {
+  dispatch: PropTypes.func.isRequired,
   streams: PropTypes.object.isRequired,
   actions: PropTypes.object.isRequired,
+  filters: PropTypes.object.isRequired,
+  games: PropTypes.object.isRequired,
 };
 
 function mapStateToProps(state) {
-  const { streams } = state;
+  const { streams, filters, games } = state;
 
-  return { streams };
+  return { streams, filters, games };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(StreamActions, dispatch),
+    dispatch,
+    actions: {
+      stream: bindActionCreators(StreamActions, dispatch),
+      filters: bindActionCreators(FilterActions, dispatch),
+      games: bindActionCreators(GamesActions, dispatch),
+    },
   };
 }
 

@@ -1,8 +1,12 @@
-import {combineReducers} from 'redux';
-import todos from './todos';
+import { combineReducers } from 'redux';
+import streams from './streams';
+import filters from './filters';
+import games from './games';
 
 const rootReducer = combineReducers({
-  todos
+  streams,
+  filters,
+  games
 });
 
 export default rootReducer;

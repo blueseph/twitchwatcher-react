@@ -1,37 +1,49 @@
 import React, { Component, PropTypes } from 'react';
-import { endpoints } from '../../utils/StreamUtils';
+import { endpoints } from '../../utils/TwitchUtils';
 
 import { Streams } from './Streams';
-import { StreamFilterBar } from './StreamFilterBar';
+import { NameFilterBar } from './NameFilterBar';
+import { GameFilterBar } from './GameFilterBar';
 
 class StreamBar extends Component {
   constructor(props, context) {
     super(props, context);
     this.fetchStreams = this.fetchStreams.bind(this);
+    this.fetchGames = this.fetchGames.bind(this);
   }
 
   componentDidMount() {
     this.fetchStreams();
+    this.fetchGames();
+  }
+
+  fetchGames() {
+    this.props.actions.games.fetch();
   }
 
   fetchStreams() {
-    this.props.actions.fetchStreams(endpoints.streams);
+    this.props.actions.stream.fetch(endpoints.streams);
   }
 
   render() {
+    const { actions, streams, filters, games, dispatch } = this.props;
+
     return (
       <div className="stream-bar">
-        <StreamFilterBar />
-        <Streams {...this.props} />
+        <NameFilterBar actions={actions.filters} dispatch={dispatch} />
+        <GameFilterBar actions={actions.filters} dispatch={dispatch} games={games} />
+        <Streams actions={actions.stream} streams={streams} filters={filters} />
       </div>
     );
   }
 }
 
 StreamBar.propTypes = {
+  dispatch: PropTypes.func.isRequired,
   actions: PropTypes.object.isRequired,
-  isFetching: PropTypes.bool.isRequired,
-  streams: PropTypes.array.isRequired,
+  streams: PropTypes.object.isRequired,
+  games: PropTypes.object.isRequired,
+  filters: PropTypes.object.isRequired,
 };
 
 export { StreamBar };

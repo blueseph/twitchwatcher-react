@@ -1,36 +1,36 @@
-import { FETCH_STREAMS_REQUEST, FETCH_STREAMS_FAILURE, FETCH_STREAMS_SUCCESS }
-      from '../../constants/ActionTypes';
+import { FETCH_GAMES_REQUEST, FETCH_GAMES_SUCCESS, FETCH_GAMES_FAILURE }
+      from '../constants/RequestTypes';
 
 const initialState = {
   isFetching: false,
-  streamFetchError: false,
-  streams: [],
+  fetchError: false,
+  data: [],
 };
 
-export default function streams(state = initialState, action) {
+export default function games(state = initialState, action) {
   switch (action.type) {
-    case FETCH_STREAMS_REQUEST: {
+    case FETCH_GAMES_REQUEST: {
       return {
         ...state,
-        streams: [],
+        data: [],
         isFetching: true,
         streamFetchError: false,
       };
     }
 
-    case FETCH_STREAMS_SUCCESS: {
+    case FETCH_GAMES_SUCCESS: {
       return {
         ...state,
-        streams: action.streams,
+        data: action.games,
         isFetching: false,
         streamFetchError: false,
       };
     }
 
-    case FETCH_STREAMS_FAILURE: {
+    case FETCH_GAMES_FAILURE: {
       return {
         ...state,
-        streams: [],
+        data: [],
         isFetching: false,
         streamFetchError: true,
       };
