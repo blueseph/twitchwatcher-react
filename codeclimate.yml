@@ -1,3 +1,4 @@
 exclude_paths:
   - "conf/"
   - "gulp_tasks/"
+  - "**.spec.js"
