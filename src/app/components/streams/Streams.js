@@ -19,7 +19,8 @@ class Streams extends Component {
     if (!data.length) return 'No Streams Found';
 
     return filterStreams(data, filters)
-            .map(stream => <Stream key={stream._id} stream={stream} actions={actions} dispatch={dispatch} />);
+            .map(stream =>
+              <Stream key={stream.id} stream={stream} actions={actions} dispatch={dispatch} />);
   }
 
   render() {

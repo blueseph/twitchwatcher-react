@@ -1,3 +1,6 @@
+/* eslint no-underscore-dangle:0 */
+/* twitch natively has underscores as ids. nothing we can do */
+
 export const baseUrl = 'https://api.twitch.tv/kraken';
 
 export const endpoints = {
@@ -23,6 +26,7 @@ export function getTwitchData(endpoint, options = {}) {
 
   return fetch(`${endpoint}?${params}`)
           .then(response => response.json())
+          .then(response => ({ ...response, id: response._id }))
           .catch(err => { throw err; });
 }
 

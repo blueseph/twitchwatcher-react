@@ -21,7 +21,6 @@ class GameFilterBar extends Component {
   }
 
   render() {
-
     return (
       <div className="game-filter-bar">
         <select
