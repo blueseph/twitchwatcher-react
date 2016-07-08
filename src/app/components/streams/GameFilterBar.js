@@ -13,9 +13,14 @@ class GameFilterBar extends Component {
     dispatch(filterGame(this.refs.filter.value));
   }
 
-  render() {
+  renderGames() {
     const { games } = this.props;
     const { data } = games;
+
+    return data.map(game => <option key={game.id} value={game.name}>{game.name} </option>);
+  }
+
+  render() {
 
     return (
       <div className="game-filter-bar">
@@ -25,8 +30,7 @@ class GameFilterBar extends Component {
           ref="filter"
           onChange={this.handleOnChange}
         >
-
-          {data.map(game => <option key={game.id} value={game.name}>{game.name} </option>)}
+          {this.renderGames()}
         </select>
       </div>);
   }

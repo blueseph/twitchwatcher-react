@@ -10,7 +10,7 @@ class Streams extends Component {
   }
 
   renderStreams() {
-    const { streams, filters } = this.props;
+    const { streams, filters, actions, dispatch } = this.props;
     const { isFetching, streamFetchError, data } = streams;
 
     // can this be done better?
@@ -18,9 +18,8 @@ class Streams extends Component {
     if (streamFetchError) return 'Can\'t load streams';
     if (!data.length) return 'No Streams Found';
 
-
     return filterStreams(data, filters)
-            .map(stream => <Stream key={stream._id} stream={stream} />);
+            .map(stream => <Stream key={stream._id} stream={stream} actions={actions} dispatch={dispatch} />);
   }
 
   render() {
@@ -32,6 +31,8 @@ class Streams extends Component {
 Streams.propTypes = {
   streams: PropTypes.object.isRequired,
   filters: PropTypes.object.isRequired,
+  actions: PropTypes.object.isRequired,
+  dispatch: PropTypes.func.isRequired,
 };
 
 export { Streams };

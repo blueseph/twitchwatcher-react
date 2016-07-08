@@ -7,15 +7,15 @@ class NameFilterBar extends Component {
   }
 
   handleOnChange() {
-    const { dispatch } = this.props;
-    const { filterName } = this.props.actions;
+    const { dispatch, actions } = this.props;
+    const { filterName } = actions;
 
     dispatch(filterName(this.refs.filter.value));
   }
 
   render() {
     return (
-      <div className="filter-bar">
+      <div className="name-filter-bar">
         <input
           className="filter"
           type="text"

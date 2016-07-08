@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import { endpoints } from '../../utils/TwitchUtils';
 
 import { Streams } from './Streams';
 import { NameFilterBar } from './NameFilterBar';
@@ -18,11 +17,11 @@ class StreamBar extends Component {
   }
 
   fetchGames() {
-    this.props.actions.games.fetch();
+    this.props.actions.games.fetch({ limit: 100 });
   }
 
   fetchStreams() {
-    this.props.actions.stream.fetch(endpoints.streams);
+    this.props.actions.stream.fetch({ limit: 100 });
   }
 
   render() {
@@ -32,7 +31,7 @@ class StreamBar extends Component {
       <div className="stream-bar">
         <NameFilterBar actions={actions.filters} dispatch={dispatch} />
         <GameFilterBar actions={actions.filters} dispatch={dispatch} games={games} />
-        <Streams actions={actions.stream} streams={streams} filters={filters} />
+        <Streams actions={actions.stream} streams={streams} filters={filters} dispatch={dispatch} />
       </div>
     );
   }
