@@ -51,7 +51,7 @@ module.exports = {
       'process.env.NODE_ENV': '"production"'
     }),
     new webpack.optimize.UglifyJsPlugin({
-      compress: {unused: true, dead_code: true} // eslint-disable-line camelcase
+      compress: { unused: true, dead_code: true, warnings: false } // eslint-disable-line camelcase
     })
   ],
   postcss: () => [autoprefixer],
