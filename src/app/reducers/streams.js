@@ -3,7 +3,7 @@ import { FETCH_STREAMS_REQUEST, FETCH_STREAMS_FAILURE, FETCH_STREAMS_SUCCESS }
 
 const initialState = {
   isFetching: false,
-  fetchError: false,
+  streamFetchError: true,
   data: [],
 };
 

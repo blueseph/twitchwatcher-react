@@ -2,23 +2,38 @@ import * as types from '../../constants/FilterTypes';
 import * as actions from './filters';
 
 describe('filter actions', () => {
-  it('filterName should create FILTER_BY_NAME action', () => {
-    expect(actions.filterName('dota')).toEqual({
-      type: types.FILTER_BY_NAME,
-      term: 'dota',
+
+  describe('filterName', () => {
+    it('should exist', () => {
+      expect(actions.filterName).toBeDefined();
+    });
+
+    it('should return a FILTER_BY_NAME action', () => {
+      const term = 'dota';
+
+      expect(actions.filterName(term)).toEqual({ type: types.FILTER_BY_NAME, term });
     });
   });
 
-  it('filterGame should create FILTER_BY_GAME action', () => {
-    expect(actions.filterGame('League of Legends')).toEqual({
-      type: types.FILTER_BY_GAME,
-      term: 'League of Legends',
+  describe('gameName', () => {
+    it('should exist', () => {
+      expect(actions.filterGame).toBeDefined();
+    });
+
+    it('should return a FILTER_BY_GAME action', () => {
+      const term = 'League of Legends';
+
+      expect(actions.filterGame(term)).toEqual({ type: types.FILTER_BY_GAME, term });
     });
   });
 
-  it('removeFilter should create FILTER_BY_GAME action', () => {
-    expect(actions.removeFilter()).toEqual({
-      type: types.REMOVE_FILTER,
+  describe('removeFilter', () => {
+    it('should exist', () => {
+      expect(actions.removeFilter).toBeDefined();
+    });
+
+    it('should return a FILTER_BY_GAME action', () => {
+      expect(actions.removeFilter()).toEqual({ type: types.REMOVE_FILTER });
     });
   });
 });

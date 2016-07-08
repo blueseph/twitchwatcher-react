@@ -1,3 +1,6 @@
+/* eslint no-underscore-dangle:0 */
+/* twitch natively has underscores as ids. nothing we can do */
+
 import React, { Component, PropTypes } from 'react';
 import { Stream } from './Stream';
 import { Loader } from '../shared/Loader';
@@ -20,7 +23,7 @@ class Streams extends Component {
 
     return filterStreams(data, filters)
             .map(stream =>
-              <Stream key={stream.id} stream={stream} actions={actions} dispatch={dispatch} />);
+              <Stream key={stream._id} stream={stream} actions={actions} dispatch={dispatch} />);
   }
 
   render() {
