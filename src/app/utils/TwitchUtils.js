@@ -1,5 +1,9 @@
 export const baseUrl = 'https://api.twitch.tv/kraken';
 
+const parameterizeOptions = (options = {}) => Object.keys(options)
+                      .map(key => `${key}=${encodeURIComponent(options[key])}`)
+                      .join('&');
+
 export const endpoints = {
   teams: 'teams',
   channel: 'channel',
@@ -17,9 +21,7 @@ export function twitchEndpointFinder(endpoint) {
 }
 
 export function getTwitchData(endpoint, options = {}) {
-  const params = Object.keys(options)
-                        .map(key => `${key}=${encodeURIComponent(options[key])}`)
-                        .join('&');
+  const params = parameterizeOptions(options);
 
   return fetch(`${endpoint}?${params}`)
           .then(response => response.json())
@@ -27,9 +29,7 @@ export function getTwitchData(endpoint, options = {}) {
 }
 
 export function getGamesData(options = {}) {
-  const params = Object.keys(options)
-                        .map(key => `${key}=${encodeURIComponent(options[key])}`)
-                        .join('&');
+  const params = parameterizeOptions(options);
 
     // alright so apparently this is tucked away so no one can ever find it thanks twitch/
   return fetch(`${baseUrl}/games/top?${params}`)

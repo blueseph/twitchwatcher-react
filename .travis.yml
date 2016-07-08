@@ -6,7 +6,10 @@ before_script: npm install -g codeclimate-test-reporter
 script:
   - npm run build
   - npm run test
-after_script: codeclimate-test-reporter < lcov.info
+after_script:
+  - ls
+  - ls coverage/
+  - codeclimate-test-reporter < lcov.info
 addons:
     code_climate:
         repo_token: f014d4250848e3e4e131f2388d220601b8994ecaca4a6624bdbada6761ad6468
