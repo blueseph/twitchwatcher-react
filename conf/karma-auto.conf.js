@@ -24,9 +24,9 @@ module.exports = function (config) {
         'webpack'
       ]
     },
-    reporters: ['progress', 'coverage'],
+    reporters: ['progress', 'coverage', 'spec'],
     coverageReporter: {
-      type: 'html',
+      type: 'lcov',
       dir: 'coverage/'
     },
     webpack: require('./webpack-test.conf'),
