@@ -16,6 +16,7 @@ module.exports = function (config) {
       'jasmine'
     ],
     files: [
+      'node_modules/whatwg-fetch/fetch.js',
       'node_modules/es6-shim/es6-shim.js',
       conf.path.src('index.spec.js')
     ],

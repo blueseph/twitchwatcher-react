@@ -1,6 +1,5 @@
 // import configureMockStore from 'redux-mock-store';
 // import * as types from '../../constants/RequestTypes';
-// import * as utils from '../../utils/TwitchUtils';
 // import * as actions from './games';
 // import thunk from 'redux-thunk';
 // import nock from 'nock';
@@ -11,11 +10,11 @@
 // describe('async actions', () => {
 //   let store;
 //   let streams;
-//   let twitchNock;
+//   let preparedNock;
 //
 //   beforeEach(() => {
 //     streams = { body: { streams: [{ name: 'Kripparrian' }] } };
-//     twitchNock = nock('https://api.twitch.tv/').get('kraken/games/top/');
+//     preparedNock = nock('https://api.twitch.tv/').get('kraken/games/top/');
 //
 //     store = mockStore({ streams: [] });
 //   });
@@ -25,19 +24,25 @@
 //   });
 //
 //   it('should create FETCH_STREAMS_SUCCESS when fetching streams is successful', () => {
-//     twitchNock.reply(200, streams);
+//     preparedNock.reply(200, streams);
+//
+//     console.log('yeah');
+//     console.log(actions.fetch());
+//     console.log(store.dispatch(actions.fetch()));
+//     console.log('yeah');
 //
 //     const expectedActions = [
 //       { type: types.FETCH_GAMES_REQUEST },
 //       { types: types.FETCH_GAMES_SUCCESS, streams },
 //     ];
 //
+//
 //     return store.dispatch(actions.fetch())
 //       .then(() => expect(store.getActions()).toEqual(expectedActions));
 //   });
 //
 //   it('should create FETCH_GAMES_FAILURE when fetching streams is unsuccessful', () => {
-//     twitchNock.reply(500);
+//     preparedNock.reply(500);
 //
 //     const expectedActions = [
 //       { type: types.FETCH_GAMES_REQUEST },
