@@ -1,3 +1,6 @@
+/* eslint no-underscore-dangle:0 */
+/* twitch natively has underscores as ids. nothing we can do */
+
 export const baseUrl = 'https://api.twitch.tv/kraken';
 
 const parameterizeOptions = (options = {}) => Object.keys(options)
