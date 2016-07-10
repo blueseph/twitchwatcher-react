@@ -40,7 +40,6 @@ export default function streams(state = initialState, action) {
     }
 
     case SHOW_STREAMS: {
-      console.log({...state, visible: true});
       return {
         ...state,
         visible: true,
@@ -55,7 +54,6 @@ export default function streams(state = initialState, action) {
     }
 
     default: {
-      console.log(action);
       return state;
     }
   }

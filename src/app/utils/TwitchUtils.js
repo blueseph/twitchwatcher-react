@@ -3,7 +3,7 @@
 
 export const baseUrl = 'https://api.twitch.tv/kraken';
 
-const parameterizeOptions = (options = {}) => Object.keys(options)
+export const parameterizeOptions = (options = {}) => Object.keys(options)
                       .map(key => `${key}=${encodeURIComponent(options[key])}`)
                       .join('&');
 
