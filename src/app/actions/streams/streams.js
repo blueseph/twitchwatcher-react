@@ -12,6 +12,10 @@ export function fetch(options = {}) {
   };
 }
 
+export function showStreams() {
+  return { type: aTypes.SHOW_STREAMS };
+}
+
 export function hideStreams() {
   return { type: aTypes.HIDE_STREAMS };
 }

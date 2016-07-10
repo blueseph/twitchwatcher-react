@@ -5,11 +5,44 @@ import React, { Component, PropTypes } from 'react';
 import { Stream } from './Stream';
 import { Loader } from '../shared/Loader';
 import { filterStreams } from '../../utils/FilterUtils';
+import classnames from 'classnames';
 
 class Streams extends Component {
   constructor(props, context) {
     super(props, context);
     this.renderStreams = this.renderStreams.bind(this);
+    this.renderToggle = this.renderToggle.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick() {
+    const { actions, dispatch, streams } = this.props;
+    const { showStreams, hideStreams } = actions;
+    const { visible } = streams;
+
+    const visibility = visible ? hideStreams : showStreams;
+
+    dispatch(visibility());
+  }
+
+  renderClasses() {
+    const { streams } = this.props;
+    const { visible } = streams;
+
+    const streamClass = classnames({
+      streams: true,
+      open: visible,
+      closed: !visible,
+    });
+
+    return streamClass;
+  }
+
+  renderToggle() {
+    const { streams } = this.props;
+    const { visible } = streams;
+
+    return visible ? 'Show' : 'Hide';
   }
 
   renderStreams() {
@@ -27,7 +60,10 @@ class Streams extends Component {
   }
 
   render() {
-    return <ul className="streams"> {this.renderStreams()} </ul>;
+    return (<div>
+      <div onClick={this.handleClick}> {this.renderToggle()} </div>
+      <ul className={this.renderClasses()}> {this.renderStreams()} </ul>
+    </div>);
   }
 }
 

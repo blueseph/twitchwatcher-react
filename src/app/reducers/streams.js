@@ -1,9 +1,12 @@
 import { FETCH_STREAMS_REQUEST, FETCH_STREAMS_FAILURE, FETCH_STREAMS_SUCCESS }
       from '../constants/RequestTypes';
+import { SHOW_STREAMS, HIDE_STREAMS } from '../constants/ActionTypes';
+
 
 const initialState = {
   isFetching: false,
   streamFetchError: true,
+  visible: true,
   data: [],
 };
 
@@ -36,7 +39,23 @@ export default function streams(state = initialState, action) {
       };
     }
 
+    case SHOW_STREAMS: {
+      console.log({...state, visible: true});
+      return {
+        ...state,
+        visible: true,
+      };
+    }
+
+    case HIDE_STREAMS: {
+      return {
+        ...state,
+        visible: false,
+      };
+    }
+
     default: {
+      console.log(action);
       return state;
     }
   }

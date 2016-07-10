@@ -1,5 +1,6 @@
 import streams from './streams';
 import * as types from '../constants/RequestTypes';
+import * as aTypes from '../constants/ActionTypes';
 
 describe('streams reducer', () => {
   it('should exist', () => {
@@ -10,6 +11,7 @@ describe('streams reducer', () => {
     const defaultState = {
       isFetching: false,
       streamFetchError: true,
+      visible: true,
       data: [],
     };
 
@@ -25,9 +27,10 @@ describe('streams reducer', () => {
       data: [],
       isFetching: true,
       streamFetchError: false,
+      visible: true,
     };
 
-    expect(streams({}, action)).toEqual(expectedState);
+    expect(streams(undefined, action)).toEqual(expectedState);
   });
 
   it('should handle a FETCH_GAMES_SUCCESS action', () => {
@@ -42,6 +45,7 @@ describe('streams reducer', () => {
       isFetching: false,
       streamFetchError: false,
       data: fetchedStreams,
+      visible: true,
     };
 
     expect(streams(undefined, action)).toEqual(expectedState);
@@ -56,8 +60,51 @@ describe('streams reducer', () => {
       data: [],
       isFetching: false,
       streamFetchError: true,
+      visible: true,
+    };
+  });
+
+  it('should handle a HIDE_STREAMS action', () => {
+    const action = {
+      type: aTypes.HIDE_STREAMS,
     };
 
-    expect(streams({}, action)).toEqual(expectedState);
+    const initialState = {
+      data: [],
+      isFetching: false,
+      streamFetchError: true,
+      visible: true,
+    };
+
+    const expectedState = {
+      data: [],
+      isFetching: false,
+      streamFetchError: true,
+      visible: false,
+    };
+
+    expect(streams(initialState, action)).toEqual(expectedState);
+  });
+
+  it('should handle a SHOW_STREAMS action', () => {
+    const action = {
+      type: aTypes.SHOW_STREAMS,
+    };
+
+    const initialState = {
+      data: [],
+      isFetching: false,
+      streamFetchError: true,
+      visible: false,
+    };
+
+    const expectedState = {
+      data: [],
+      isFetching: false,
+      streamFetchError: true,
+      visible: true,
+    };
+
+    expect(streams(initialState, action)).toEqual(expectedState);
   });
 });
