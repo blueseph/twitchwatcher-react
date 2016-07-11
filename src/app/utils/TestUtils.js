@@ -1,7 +1,5 @@
 import thunk from 'redux-thunk';
 import { applyMiddleware } from 'redux';
-import * as utils from './TwitchUtils';
-import nock from 'nock';
 
 const middlewares = [thunk];
 
@@ -9,9 +7,7 @@ export function mockStore(getState, expectedActions, onLastAction, expect) {
   function mockStoreWithoutMiddleware() {
     return {
       getState() {
-        return typeof getState === 'function' ?
-          getState() :
-          getState;
+        return getState;
       },
 
       dispatch(action) {

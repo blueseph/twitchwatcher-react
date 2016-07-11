@@ -2,7 +2,6 @@ import * as types from '../../constants/FilterTypes';
 import * as actions from './filters';
 
 describe('filter actions', () => {
-
   describe('filterName', () => {
     it('should exist', () => {
       expect(actions.filterName).toBeDefined();

@@ -31,7 +31,7 @@ describe('games reducer', () => {
   });
 
   it('should handle a FETCH_GAMES_SUCCESS action', () => {
-    const fetchedGames = [ { top: 'Counter Strike: Global Offensive' } ];
+    const fetchedGames = [{ top: 'Counter Strike: Global Offensive' }];
 
     const action = {
       type: types.FETCH_GAMES_SUCCESS,

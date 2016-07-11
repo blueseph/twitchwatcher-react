@@ -27,8 +27,6 @@ describe('selected reducer', () => {
   });
 
   it('should handle a HIDE_STREAMS action', () => {
-    const fetchedGames = [ { top: 'Counter Strike: Global Offensive' } ];
-
     const action = {
       type: types.HIDE_STREAMS,
     };

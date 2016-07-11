@@ -62,6 +62,8 @@ describe('streams reducer', () => {
       streamFetchError: true,
       visible: true,
     };
+
+    expect(streams(undefined, action)).toEqual(expectedState);
   });
 
   it('should handle a HIDE_STREAMS action', () => {
