@@ -16,6 +16,16 @@ describe('filter actions', () => {
     });
   });
 
+  describe('showStreams', () => {
+    it('should exist', () => {
+      expect(actions.showStreams).toBeDefined();
+    });
+
+    it('should return a SHOW_STREAMS action', () => {
+      expect(actions.showStreams()).toEqual({ type: aTypes.SHOW_STREAMS });
+    });
+  });
+
   describe('selectStream', () => {
     it('should exist', () => {
       expect(actions.selectStream).toBeDefined();
@@ -29,7 +39,7 @@ describe('filter actions', () => {
   });
 
   describe('fetch', () => {
-    it('should create a FETCH_GAMES_SUCCESS when fetching games is successful', done => {
+    it('should create a FETCH_STREAMS_SUCCESS when fetching games is successful', done => {
       const streams = { streams: [{ channel: { display_name: 'Sodapoppin' } }] };
       spyOn(utils, 'twitchEndpointFinder').and.returnValue(Promise.resolve('doesnt matter'));
       spyOn(utils, 'getTwitchData').and.returnValue(Promise.resolve(streams));
@@ -43,7 +53,7 @@ describe('filter actions', () => {
       store.dispatch(actions.fetch());
     });
 
-    it('should create a FETCH_GAMES_FAILURE when fetching games fails', done => {
+    it('should create a FETCH_STREAMS_FAILURE when fetching games fails', done => {
       spyOn(utils, 'twitchEndpointFinder').and.returnValue(Promise.reject());
 
       const expectedActions = [
