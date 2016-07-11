@@ -1,82 +1,33 @@
-import configureMockStore from 'redux-mock-store';
-import * as types from '../../constants/RequestTypes';
 import * as actions from './games';
-import thunk from 'redux-thunk';
-import nock from 'nock';
+import * as types from '../../constants/RequestTypes';
+import * as utils from '../../utils/TwitchUtils';
+import { mockStore } from '../../utils/TestUtils';
 
-const middlewares = [thunk];
-const mockStore = configureMockStore(middlewares);
+describe('games actions', () => {
+  it('should create a FETCH_GAMES_SUCCESS when fetching games is successful', done => {
+    const games = { top: [{ game: { name: 'Overwatch', logo: { small: 'img.png' }, _id: 123 } }] };
+    spyOn(utils, 'getGamesData').and.returnValue(Promise.resolve(games));
 
-describe('async actions', () => {
-  let store;
-  let streams;
-  let preparedNock;
+    const expectedGames = [{ name: 'Overwatch', logo: 'img.png', id: 123 }];
 
-  beforeEach(() => {
-    streams = { body: { streams: [{ name: 'Kripparrian' }] } };
-    preparedNock = nock('https://api.twitch.tv/').get('kraken/games/top');
+    const expectedActions = [
+      { type: types.FETCH_GAMES_REQUEST },
+      { type: types.FETCH_GAMES_SUCCESS, games: expectedGames },
+    ];
 
-    store = mockStore({});
+    const store = mockStore({}, expectedActions, done, expect);
+    store.dispatch(actions.fetch());
   });
 
-  afterEach(() => {
-    nock.cleanAll();
+  it('should create a FETCH_GAMES_FAILURE when fetching games fails', done => {
+    spyOn(utils, 'getGamesData').and.returnValue(Promise.reject());
+
+    const expectedActions = [
+      { type: types.FETCH_GAMES_REQUEST },
+      { type: types.FETCH_GAMES_FAILURE },
+    ];
+
+    const store = mockStore({}, expectedActions, done, expect);
+    store.dispatch(actions.fetch());
   });
-
-  // it('should do something', () => {
-  //   const fakeAction = { type: 'FAKE_ACTION' };
-  //
-  //   store.dispatch(fakeAction);
-  //   const actions = store.getActions();
-  //
-  //   expect(actions).toEqual([fakeAction]);
-  // });
-  //
-  // it('should do async stuff', () => {
-  //   function yeah() {
-  //     return {
-  //       type: 'FETCH_DATA_SUCCESS',
-  //     };
-  //   }
-  //
-  //   function fetch() {
-  //     return dispatch =>
-  //       fetch('/users.json').then(() => dispatch(yeah()));
-  //   }
-  //
-  //   return store.dispatch(fetch())
-  //     .then(() => {
-  //       expect(store.getActions()[0]).toEqual(yeah());
-  //     });
-  // });
-
-  // it('should create FETCH_STREAMS_SUCCESS when fetching streams is successful', () => {
-  //   preparedNock.reply(200, streams);
-  //
-  //   console.log('yeah');
-  //   console.log(actions.fetch());
-  //   console.log(store.dispatch(actions.fetch()));
-  //   console.log('yeah');
-  //
-  //   const expectedActions = [
-  //     { type: types.FETCH_GAMES_REQUEST },
-  //     { types: types.FETCH_GAMES_SUCCESS, streams },
-  //   ];
-  //
-  //
-  //   return store.dispatch(actions.fetch())
-  //     .then(() => expect(store.getActions()).toEqual(expectedActions));
-  // });
-
-  // it('should create FETCH_GAMES_FAILURE when fetching streams is unsuccessful', () => {
-  //   preparedNock.reply(500);
-  //
-  //   const expectedActions = [
-  //     { type: types.FETCH_GAMES_REQUEST },
-  //     { types: types.FETCH_GAMES_FAILURE, streams },
-  //   ];
-  //
-  //   return store.dispatch(actions.fetch())
-  //     .then(() => expect(store.getActions()).toEqual(expectedActions));
-  // });
 });
