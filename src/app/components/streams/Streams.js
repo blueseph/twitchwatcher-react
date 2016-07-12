@@ -42,7 +42,7 @@ class Streams extends Component {
     const { streams } = this.props;
     const { visible } = streams;
 
-    return visible ? 'Show' : 'Hide';
+    return visible ? 'Hide' : 'Show';
   }
 
   renderStreams() {
@@ -52,7 +52,7 @@ class Streams extends Component {
     // can this be done better?
     if (isFetching) return <Loader />;
     if (streamFetchError) return 'Can\'t load streams';
-    if (!data.length) return 'No Streams Found';
+    if (data === undefined || !data.length === 0) return 'No Streams Found';
 
     return filterStreams(data, filters)
             .map(stream =>
@@ -60,8 +60,8 @@ class Streams extends Component {
   }
 
   render() {
-    return (<div>
-      <div onClick={this.handleClick}> {this.renderToggle()} </div>
+    return (<div className="streams">
+      <div className="toggle" onClick={this.handleClick}> {this.renderToggle()} </div>
       <ul className={this.renderClasses()}> {this.renderStreams()} </ul>
     </div>);
   }
