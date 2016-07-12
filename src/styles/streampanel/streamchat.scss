@@ -1,6 +1,7 @@
 .stream-chat {
   display: flex;
   flex-direction: column;
+  order: 3;
 
   iframe {
     margin: 0;

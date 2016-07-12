@@ -1,11 +1,13 @@
 @import 'index.scss';
 
 @import '/shared/loader';
+@import '/components/main';
 
 @import '/streams/stream';
 @import '/streams/streams';
 @import '/streams/streambar';
 @import '/streams/namefilterbar';
+@import '/streams/gamefilterbar';
 
 @import '/streampanel/streampanel';
 @import '/streampanel/streamviewer';

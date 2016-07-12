@@ -6,7 +6,9 @@ import { shallow, mount } from 'enzyme';
 function setup(override) {
   const props = Object.assign({}, {
     dispatch: jasmine.createSpy(),
-    stream: [{}],
+    streams: [{
+      visible: true,
+    }],
     filters: {},
     games: [{}],
     actions: {
@@ -14,6 +16,8 @@ function setup(override) {
         fetch: jasmine.createSpy(),
       },
       stream: {
+        showStreams: jasmine.createSpy(),
+        hideStreams: jasmine.createSpy(),
         fetch: jasmine.createSpy(),
       },
     },
@@ -27,12 +31,12 @@ function setup(override) {
   };
 }
 
-describe('namefilter component', () => {
+describe('stream bar component', () => {
   it('should render itself', () => {
     const { wrapper } = setup();
 
-    expect(wrapper.find('div').length).toBe(1);
-    expect(wrapper.find('div').hasClass('stream-bar')).toBe(true);
+    expect(wrapper.find('div').length).toBe(2);
+    expect(wrapper.find('div').first().hasClass('stream-bar')).toBe(true);
   });
 
   it('should call functions on componentDidMount', () => {
@@ -47,6 +51,7 @@ describe('namefilter component', () => {
           display_name: 'Psychomidget',
         },
         viewers: 99,
+        visible: true,
       },
       ] },
       filters: {},
@@ -56,6 +61,8 @@ describe('namefilter component', () => {
           fetch: jasmine.createSpy(),
         },
         stream: {
+          showStreams: jasmine.createSpy(),
+          hideStreams: jasmine.createSpy(),
           fetch: jasmine.createSpy(),
         },
       },
@@ -69,5 +76,23 @@ describe('namefilter component', () => {
 
     expect(cdmProps.actions.games.fetch).toHaveBeenCalled();
     expect(cdmProps.actions.stream.fetch).toHaveBeenCalled();
+  });
+
+  describe('should handle the click event', () => {
+    it('should hide if shown', () => {
+      const { props, wrapper } = setup({ streams: { visible: true } });
+
+      wrapper.find('.toggle').simulate('click');
+      expect(props.actions.stream.hideStreams).toHaveBeenCalled();
+      expect(wrapper.find('.toggle').text()).toEqual(' Hide ');
+    });
+
+    it('should show if hidden', () => {
+      const { props, wrapper } = setup({ streams: { visible: false } });
+
+      wrapper.find('.toggle').simulate('click');
+      expect(props.actions.stream.showStreams).toHaveBeenCalled();
+      expect(wrapper.find('.toggle').text()).toEqual(' Show ');
+    });
   });
 });

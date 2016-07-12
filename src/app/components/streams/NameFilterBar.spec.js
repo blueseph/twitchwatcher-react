@@ -5,6 +5,7 @@ import { mount } from 'enzyme';
 function setup(override) {
   const props = Object.assign({}, {
     dispatch: jasmine.createSpy(),
+    stream: { visible: true },
     actions: {
       filterName: jasmine.createSpy(),
     },

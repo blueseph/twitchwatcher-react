@@ -26,7 +26,7 @@ function setup(override) {
   };
 }
 
-describe('namefilter component', () => {
+describe('game filter component', () => {
   it('should render itself', () => {
     const { wrapper } = setup();
 

@@ -22,13 +22,14 @@ class GameFilterBar extends Component {
 
   render() {
     return (
-      <div className="game-filter-bar">
+      <div className="game-filter-bar plain-select">
         <select
-          className="filter"
+          className="customer-select filter"
           type="text"
           ref="filter"
           onChange={this.handleOnChange}
         >
+          <option value={undefined}>All Games</option>
           {this.renderGames()}
         </select>
       </div>);

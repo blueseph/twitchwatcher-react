@@ -11,8 +11,10 @@ function setup(override) {
       data: [{}],
     },
     actions: {
-      showStreams: jasmine.createSpy(),
-      hideStreams: jasmine.createSpy(),
+      stream: {
+        showStreams: jasmine.createSpy(),
+        hideStreams: jasmine.createSpy,
+      },
     },
   }, override);
 
@@ -24,11 +26,11 @@ function setup(override) {
   };
 }
 
-describe('namefilter component', () => {
+describe('streams component', () => {
   it('should render itself', () => {
     const { wrapper } = setup();
 
-    expect(wrapper.find('div').length).toBe(2);
+    expect(wrapper.find('div').length).toBe(1);
     expect(wrapper.find('ul').length).toBe(1);
   });
 
@@ -48,23 +50,5 @@ describe('namefilter component', () => {
     const { wrapper } = setup({ streams: { data: undefined } });
 
     expect(wrapper.find('ul').text()).toBe(' No Streams Found ');
-  });
-
-  describe('should handle the click event', () => {
-    it('should hide if shown', () => {
-      const { props, wrapper } = setup({ streams: { visible: true } });
-
-      wrapper.find('.toggle').simulate('click');
-      expect(props.actions.hideStreams).toHaveBeenCalled();
-      expect(wrapper.find('.toggle').text()).toEqual(' Hide ');
-    });
-
-    it('should show if hidden', () => {
-      const { props, wrapper } = setup({ streams: { visible: false } });
-
-      wrapper.find('.toggle').simulate('click');
-      expect(props.actions.showStreams).toHaveBeenCalled();
-      expect(wrapper.find('.toggle').text()).toEqual(' Show ');
-    });
   });
 });
