@@ -26,4 +26,4 @@ exclude_paths: [
   "gulp_tasks/",
   "**.spec.js",
 ]
--"src/app/sotre/configureStore.js"
+- "src/app/store/configureStore.js"
