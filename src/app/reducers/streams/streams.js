@@ -1,6 +1,6 @@
 import { FETCH_STREAMS_REQUEST, FETCH_STREAMS_FAILURE, FETCH_STREAMS_SUCCESS }
-      from '../constants/RequestTypes';
-import { SHOW_STREAMS, HIDE_STREAMS } from '../constants/ActionTypes';
+      from '../../constants/RequestTypes';
+import { SHOW_STREAMS, HIDE_STREAMS } from '../../constants/ActionTypes';
 
 
 const initialState = {

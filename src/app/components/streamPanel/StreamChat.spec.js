@@ -1,5 +1,5 @@
 import React from 'react';
-import { StreamViewer } from './StreamViewer';
+import { StreamChat } from './StreamChat';
 import { shallow } from 'enzyme';
 
 function setup(override) {
@@ -15,7 +15,7 @@ function setup(override) {
     },
   }, override);
 
-  const wrapper = shallow(<StreamViewer {...props} />);
+  const wrapper = shallow(<StreamChat {...props} />);
 
   return {
     props,

@@ -7,6 +7,7 @@ script:
   - npm run build
   - npm run test
 after_script:
+  - ls
   - codeclimate-test-reporter < coverage/**/lcov.info
 addons:
     artifacts: true

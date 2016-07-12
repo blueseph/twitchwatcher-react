@@ -1,5 +1,5 @@
 import selected from './selected';
-import * as types from '../constants/ActionTypes';
+import * as types from '../../constants/ActionTypes';
 
 describe('selected reducer', () => {
   it('should exist', () => {

@@ -1,5 +1,5 @@
 import { FETCH_GAMES_REQUEST, FETCH_GAMES_SUCCESS, FETCH_GAMES_FAILURE }
-      from '../constants/RequestTypes';
+      from '../../constants/RequestTypes';
 
 const initialState = {
   isFetching: false,

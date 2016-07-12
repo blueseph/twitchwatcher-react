@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { StreamBar } from '../components/streams/StreamBar';
-import { StreamViewer } from '../components/streamViewer/StreamViewer';
+import { StreamPanel } from '../components/streamPanel/StreamPanel';
 
 import * as StreamActions from '../actions/streams/streams';
 import * as FilterActions from '../actions/filters/filters';
@@ -17,7 +17,7 @@ const TwitchWatcher = ({
   selected,
 }) =>
   <div className="twitchwatcher">
-    <StreamViewer
+    <StreamPanel
       selected={selected}
     />
     <StreamBar

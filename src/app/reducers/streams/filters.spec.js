@@ -1,5 +1,5 @@
 import filters from './filters';
-import * as types from '../constants/FilterTypes';
+import * as types from '../../constants/FilterTypes';
 
 describe('filter reducer', () => {
   it('should exist', () => {

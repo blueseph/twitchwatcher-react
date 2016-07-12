@@ -42,6 +42,7 @@ describe('namefilter component', () => {
     wrapper.ref('filter').get(0).value = 'World of Warcraft';
     wrapper.ref('filter').simulate('change', { target: { value: 'World of Warcraft' } });
 
+    expect(props.dispatch).toHaveBeenCalled();
     expect(props.actions.filterGame).toHaveBeenCalledWith('World of Warcraft');
   });
 });

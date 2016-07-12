@@ -1,6 +1,6 @@
 import streams from './streams';
-import * as types from '../constants/RequestTypes';
-import * as aTypes from '../constants/ActionTypes';
+import * as types from '../../constants/RequestTypes';
+import * as aTypes from '../../constants/ActionTypes';
 
 describe('streams reducer', () => {
   it('should exist', () => {

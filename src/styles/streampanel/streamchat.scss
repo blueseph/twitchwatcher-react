@@ -1,0 +1,10 @@
+.stream-chat {
+  display: flex;
+  flex-direction: column;
+
+  iframe {
+    margin: 0;
+    border: 0;
+    flex-grow: 1;
+  }
+}

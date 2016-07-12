@@ -1,5 +1,5 @@
 import { SHOW_STREAMS, HIDE_STREAMS, SELECT_STREAM }
-      from '../constants/ActionTypes';
+      from '../../constants/ActionTypes';
 
 const initialState = {
   stream: {},

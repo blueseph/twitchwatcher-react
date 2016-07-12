@@ -1,5 +1,5 @@
 import games from './games';
-import * as types from '../constants/RequestTypes';
+import * as types from '../../constants/RequestTypes';
 
 describe('games reducer', () => {
   it('should exist', () => {

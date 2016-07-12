@@ -1,4 +1,4 @@
-import { FILTER_BY_GAME, FILTER_BY_NAME, REMOVE_FILTER } from '../constants/FilterTypes';
+import { FILTER_BY_GAME, FILTER_BY_NAME, REMOVE_FILTER } from '../../constants/FilterTypes';
 
 const initialState = {
   isFiltering: false,

@@ -34,6 +34,7 @@ describe('namefilter component', () => {
     wrapper.ref('filter').get(0).value = 'AGDQ';
     wrapper.ref('filter').simulate('change', { target: { value: 'AGDQ' } });
 
+    expect(props.dispatch).toHaveBeenCalled();
     expect(props.actions.filterName).toHaveBeenCalledWith('AGDQ');
   });
 });
