@@ -24,10 +24,9 @@ ratings:
   - "**.php"
   - "**.py"
   - "**.rb"
-exclude_paths: [
-  "conf/",
-  "gulp_tasks/",
-  "**.spec.js",
-  "src/app/store/configureStore.js",
-  "src/app/utils/testUtils.js"
-]
+exclude_paths:
+  - "conf/",
+  - "gulp_tasks/",
+  - "**.spec.js",
+  - "src/app/store/configureStore.js",
+  - "src/app/utils/testUtils.js"
