@@ -13,9 +13,6 @@ function setup(override) {
         },
       },
     },
-    actions: {
-      filterName: jasmine.createSpy(),
-    },
   }, override);
 
   const wrapper = shallow(<StreamViewer {...props} />);
