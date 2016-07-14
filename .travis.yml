@@ -11,6 +11,9 @@ env:
   - secure: euMxRSrP0pEGZcVRhozgFhSw4PilKw7ihmOsUAM0owh2imSHR8KRAcegn7h3cSKW50OtEELzgVaZR/Hu+r9JwZLUG5SpY5vO5Dl2XcVc5LWP9/rEypDBHdFBdnEKIZdF2ik2evMZ8+PSWbn09y4zEyHSE31NZf0hIjmvB03432Qz787vZOV3QsdTKcNtlSmX78sDs3p7AQN4ZSfMkrCfOKyQdrHyw69QSInKNveUPk/uyqoLZXyIMYEmLqjH4O87rjpBbycKEuqNI1Dr3jOc0PokeONvC7enopIsb+1kIKhvnAPnBr65WlLjpj/9rABH4de+myRo5rNBslwzfIdtC0iXINRUrLBnKSUxfYIprlEOzQ/o+vv7apB7AwB21AGHdmrG6dOwJowOgvQkwtUScySh4ajin/flFIL3HqpPNnq3MY/FdFxmEuuqlOkpQxtG7ufaTCqmVwqUclnL8cloYAYU2KuqPE+8qJPtA/3eJn35aIRVC8+D5uo2om/VACIYrG3CGw7BMIC33Dibx9pWCHcpd2hrgZDUK4PAE3ANosX2EqfNOIfsbug0PZONs2zULtLIUEpYFNdd671p7wR6urN0YbQkqDLyiXf27MePnVPhAQnCFShT3jBVi5fv7k45j8P9Vs9pd9YnLg6/OZW+cKkjyFhgmdvw4ThwuwQcXOo=
 before_script: npm install -g codeclimate-test-reporter
 script:
+- echo $DOCKER_USERNAME
+- echo "$DOCKER_USERNAME"
+- echo ${DOCKER_USERNAME}
 - npm run build
 - npm run test
 after_script: codeclimate-test-reporter < coverage/**/lcov.info
