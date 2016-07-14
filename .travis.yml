@@ -1,15 +1,27 @@
 language: node_js
-node_js:
-  "6.2.2"
+services: docker
+sudo: required
+node_js: 6.2.2
 install: npm install
+env:
+    global:
+       - COMMIT=${TRAVIS_COMMIT::6}
 before_script: npm install -g codeclimate-test-reporter
 script:
-  - npm run build
-  - npm run test
-after_script:
-  - ls
-  - codeclimate-test-reporter < coverage/**/lcov.info
+- npm run build
+- npm run test
+after_script: codeclimate-test-reporter < coverage/**/lcov.info
+after_success:
+  - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+  - export REPO=$DOCKER_USER/k-auth
+  - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH; fi`
+  - echo $REPO:$TAG:$COMMIT
+  - docker build -f Dockerfile -t $REPO:$COMMIT .
+  - docker tag $REPO:$COMMIT $REPO:$TAG
+  - docker tag $REPO:$COMMIT $REPO:travis-$TRAVIS_BUILD_NUMBER
+  - docker push $REPO
 addons:
-    artifacts: true
-    code_climate:
-        repo_token: f014d4250848e3e4e131f2388d220601b8994ecaca4a6624bdbada6761ad6468
+  code_climate:
+    repo_token: f014d4250848e3e4e131f2388d220601b8994ecaca4a6624bdbada6761ad6468
+dd:
+  secure: EvNlpSAZBz2YQc0xNWZojSuRDzDekUlMqaPWVs8cd0vPB/MF6D3a80pLKEjgQse7YOUuyXFSza2EuU3i8NssNQ2kK5jBFPs2uPX8mSYq1vxrHD64MPI72x4dntozgVs8v0PAAJ9xdTchVWxMFngChGr8udlIqg78nbwLykwMFv86QZdS1URJYA5Bvot+LDUs0AIxQ0Zu/BTVdm/xf+rbvM9GEMuCvqqR1o2VzLTYoB0bgkiyo+vGZfpf9i1T8nrWwD1VGBpn/VZzoDJu2rjHGIShGpRfrWwFmMmUKbR7fCqDgB3NQ1slH4oKTsctomW5QoMJdfWaQppILOnhlmOndAMmfGCNFSCl3rosCIb/yAS9jGjWzcL1o83mJLG7rhfiYaRZThcCR0hKLCzdygPlfbhG3SAG2DU2fcm5hiYhGGfDMlnNPNLsxXcB6X9xxVyY6YFVFb3CpENt73wJUYOBEa9WU3sKJG58vdsNRLEHMW7KVdYLHj3z+x28DpmpNvNYGc/etPd1MFWobStBRa4ORi1kEbVbgBDCp2XfS3BuqXcctXpmY4qsRqjMQtZZMmEt8m93FJr5JPKTPxgooXDzHpcQ67V1kCQyIQ2lD59F8uGilwaQSUr1avnGRC5UfqGgwdOdFqmDLn/vOKVaYcVDYIvgFSIC8CVNw6yJjYxwZ24=
