@@ -14,6 +14,7 @@ class StreamViewer extends Component {
         frameBorder="0"
         width="100%"
         style={{ height: 'calc(100% - 1px)' }}
+        allowFullScreen="1"
         src={`http://player.twitch.tv/?channel=${stream.channel.name}&html5=true`}
       />
     );
