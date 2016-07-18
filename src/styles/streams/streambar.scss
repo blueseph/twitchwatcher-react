@@ -2,6 +2,7 @@
   order: -1;
   flex: 0;
   height: 100vh;
+  transition: all 1000ms;
 
   .toggle {
     background: #235f18;
@@ -11,5 +12,15 @@
     font-family: 'Montserrat', sans-serif;
     text-align: center;
     cursor: pointer;
+    transition: all 180ms;
+  }
+
+  .toggle.closed {
+    position: absolute;
+    left: calc(-4em);
+  }
+
+  .toggle.closed:hover {
+    left: 0;
   }
 }

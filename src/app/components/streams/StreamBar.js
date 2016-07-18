@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import classnames from 'classnames';
 
 import { Streams } from './Streams';
 
@@ -29,6 +30,19 @@ class StreamBar extends Component {
     this.props.actions.stream.fetch({ limit: 100 });
   }
 
+  renderClasses() {
+    const { streams } = this.props;
+    const { visible } = streams;
+
+    const toggleClass = classnames({
+      toggle: true,
+      open: visible,
+      closed: !visible,
+    });
+
+    return toggleClass;
+  }
+
   renderToggle() {
     const { streams } = this.props;
     const { visible } = streams;
@@ -39,7 +53,9 @@ class StreamBar extends Component {
   render() {
     return (
       <div className="stream-bar">
-        <div className="toggle" onClick={this.handleClick}> {this.renderToggle()} </div>
+        <div className={this.renderClasses()} onClick={this.handleClick}>
+          {this.renderToggle()}
+        </div>
         <Streams {...this.props} />
       </div>
     );

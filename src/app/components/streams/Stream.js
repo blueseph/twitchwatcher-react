@@ -8,9 +8,10 @@ class Stream extends Component {
 
   handleClick() {
     const { stream, dispatch, actions } = this.props;
-    const { selectStream } = actions;
+    const { selectStream, hideStreams } = actions;
 
     dispatch(selectStream(stream));
+    dispatch(hideStreams());
   }
 
   render() {
