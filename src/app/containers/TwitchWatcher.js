@@ -12,7 +12,7 @@ const TwitchWatcher = ({
   dispatch,
   actions,
   streams,
-  filters,
+  filter,
   games,
   selected,
 }) =>
@@ -23,7 +23,7 @@ const TwitchWatcher = ({
     <StreamBar
       actions={actions}
       streams={streams}
-      filters={filters}
+      filter={filter}
       dispatch={dispatch}
       games={games}
     />
@@ -33,15 +33,15 @@ TwitchWatcher.propTypes = {
   dispatch: PropTypes.func.isRequired,
   streams: PropTypes.object.isRequired,
   actions: PropTypes.object.isRequired,
-  filters: PropTypes.object.isRequired,
+  filter: PropTypes.object.isRequired,
   games: PropTypes.object.isRequired,
   selected: PropTypes.object.isRequired,
 };
 
 function mapStateToProps(state) {
-  const { streams, filters, games, selected } = state;
+  const { streams, filter, games, selected } = state;
 
-  return { streams, filters, games, selected };
+  return { streams, filter, games, selected };
 }
 
 function mapDispatchToProps(dispatch) {
@@ -49,7 +49,7 @@ function mapDispatchToProps(dispatch) {
     dispatch,
     actions: {
       stream: bindActionCreators(StreamActions, dispatch),
-      filters: bindActionCreators(FilterActions, dispatch),
+      filter: bindActionCreators(FilterActions, dispatch),
       games: bindActionCreators(GamesActions, dispatch),
     },
   };

@@ -7,8 +7,7 @@ import { filterStreams } from '../../utils/FilterUtils';
 
 import { Stream } from './Stream';
 import { Loader } from '../shared/Loader';
-import { NameFilterBar } from './NameFilterBar';
-import { GameFilterBar } from './GameFilterBar';
+import { FilterBar } from './FilterBar';
 
 class Streams extends Component {
   constructor(props, context) {
@@ -30,7 +29,7 @@ class Streams extends Component {
   }
 
   renderStreams() {
-    const { streams, filters, actions, dispatch } = this.props;
+    const { streams, filter, actions, dispatch } = this.props;
     const { isFetching, streamFetchError, data } = streams;
 
     // can this be done better?
@@ -38,7 +37,7 @@ class Streams extends Component {
     if (streamFetchError) return 'Can\'t load streams';
     if (data === undefined || !data.length === 0) return 'No Streams Found';
 
-    return filterStreams(data, filters)
+    return filterStreams(data, filter)
             .map(stream =>
               <Stream
                 key={stream._id}
@@ -49,11 +48,11 @@ class Streams extends Component {
   }
 
   render() {
-    const { actions, games, dispatch } = this.props;
+    const { actions, dispatch } = this.props;
+    const { filter } = actions;
 
     return (<div className={this.renderClasses()}>
-      <NameFilterBar actions={actions.filters} dispatch={dispatch} />
-      <GameFilterBar actions={actions.filters} dispatch={dispatch} games={games} />
+      <FilterBar actions={filter} dispatch={dispatch} />
       <ul className="streams"> {this.renderStreams()} </ul>
     </div>);
   }
@@ -61,8 +60,7 @@ class Streams extends Component {
 
 Streams.propTypes = {
   streams: PropTypes.object.isRequired,
-  filters: PropTypes.object.isRequired,
-  games: PropTypes.object.isRequired,
+  filter: PropTypes.object.isRequired,
   actions: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
 };
