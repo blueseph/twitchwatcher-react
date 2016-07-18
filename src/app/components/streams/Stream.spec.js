@@ -17,6 +17,7 @@ function setup(override) {
     },
     actions: {
       selectStream: jasmine.createSpy(),
+      hideStreams: jasmine.createSpy(),
     },
   }, override);
 
@@ -28,7 +29,7 @@ function setup(override) {
   };
 }
 
-describe('namefilter component', () => {
+describe('streams component', () => {
   it('should render itself', () => {
     const { wrapper } = setup();
 
@@ -42,5 +43,6 @@ describe('namefilter component', () => {
     wrapper.find('li').simulate('click');
 
     expect(props.actions.selectStream).toHaveBeenCalledWith(props.stream);
+    expect(props.actions.hideStreams).toHaveBeenCalled();
   });
 });

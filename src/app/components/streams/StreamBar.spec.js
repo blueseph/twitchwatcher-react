@@ -96,7 +96,7 @@ describe('stream bar component', () => {
 
       wrapper.find('.toggle').simulate('click');
       expect(props.actions.stream.hideStreams).toHaveBeenCalled();
-      expect(wrapper.find('.toggle').text()).toEqual(' Hide ');
+      expect(wrapper.find('.toggle').text()).toEqual('Hide');
     });
 
     it('should show if hidden', () => {
@@ -104,7 +104,7 @@ describe('stream bar component', () => {
 
       wrapper.find('.toggle').simulate('click');
       expect(props.actions.stream.showStreams).toHaveBeenCalled();
-      expect(wrapper.find('.toggle').text()).toEqual(' Show ');
+      expect(wrapper.find('.toggle').text()).toEqual('Show');
     });
   });
 });
