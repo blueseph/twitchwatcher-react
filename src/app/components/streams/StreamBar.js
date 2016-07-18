@@ -6,14 +6,12 @@ class StreamBar extends Component {
   constructor(props, context) {
     super(props, context);
     this.fetchStreams = this.fetchStreams.bind(this);
-    this.fetchGames = this.fetchGames.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.renderToggle = this.renderToggle.bind(this);
   }
 
   componentDidMount() {
     this.fetchStreams();
-    this.fetchGames();
   }
 
   handleClick() {
@@ -25,10 +23,6 @@ class StreamBar extends Component {
     const visibility = visible ? hideStreams : showStreams;
 
     dispatch(visibility());
-  }
-
-  fetchGames() {
-    this.props.actions.games.fetch({ limit: 100 });
   }
 
   fetchStreams() {
@@ -56,8 +50,7 @@ StreamBar.propTypes = {
   dispatch: PropTypes.func.isRequired,
   actions: PropTypes.object.isRequired,
   streams: PropTypes.object.isRequired,
-  games: PropTypes.object.isRequired,
-  filters: PropTypes.object.isRequired,
+  filter: PropTypes.object.isRequired,
 };
 
 export { StreamBar };

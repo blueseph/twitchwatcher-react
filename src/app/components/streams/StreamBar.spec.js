@@ -6,14 +6,26 @@ import { shallow, mount } from 'enzyme';
 function setup(override) {
   const props = Object.assign({}, {
     dispatch: jasmine.createSpy(),
-    streams: [{
-      visible: true,
-    }],
-    filters: {},
-    games: [{}],
+    filter: {
+      term: '',
+    },
+    streams: {
+      data: [{
+        _id: 123,
+        preview: {
+          medium: 'img.png',
+        },
+        channel: {
+          status: 'Diabolos -- Please send raid group energy. (I HAVE NO IDEA WHAT I\'M DOING)',
+          display_name: 'Psychomidget',
+        },
+        viewers: 99,
+        visible: true,
+      }],
+    },
     actions: {
-      games: {
-        fetch: jasmine.createSpy(),
+      filter: {
+        filter: jasmine.createSpy(),
       },
       stream: {
         showStreams: jasmine.createSpy(),
@@ -42,7 +54,11 @@ describe('stream bar component', () => {
   it('should call functions on componentDidMount', () => {
     const cdmProps = {
       dispatch: jasmine.createSpy(),
+      filter: {
+        term: '',
+      },
       streams: { data: [{
+        _id: 123,
         preview: {
           medium: 'img.png',
         },
@@ -54,11 +70,9 @@ describe('stream bar component', () => {
         visible: true,
       },
       ] },
-      filters: {},
-      games: { data: [{}] },
       actions: {
-        games: {
-          fetch: jasmine.createSpy(),
+        filter: {
+          filter: jasmine.createSpy(),
         },
         stream: {
           showStreams: jasmine.createSpy(),
@@ -68,13 +82,11 @@ describe('stream bar component', () => {
       },
     };
 
-    expect(cdmProps.actions.games.fetch).not.toHaveBeenCalled();
     expect(cdmProps.actions.stream.fetch).not.toHaveBeenCalled();
 
     const wrapper = mount(<StreamBar {...cdmProps} />);
     wrapper.update();
 
-    expect(cdmProps.actions.games.fetch).toHaveBeenCalled();
     expect(cdmProps.actions.stream.fetch).toHaveBeenCalled();
   });
 

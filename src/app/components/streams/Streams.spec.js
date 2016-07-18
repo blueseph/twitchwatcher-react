@@ -6,14 +6,24 @@ import { shallow } from 'enzyme';
 function setup(override) {
   const props = Object.assign({}, {
     dispatch: jasmine.createSpy(),
-    filters: {},
+    filter: {
+      term: '',
+    },
     streams: {
-      data: [{}],
+      data: [{
+        _id: 123,
+        channel: {
+          display_name: 'BeyondTheSummit',
+        },
+      }],
     },
     actions: {
+      filter: {
+        filter: jasmine.createSpy(),
+      },
       stream: {
         showStreams: jasmine.createSpy(),
-        hideStreams: jasmine.createSpy,
+        hideStreams: jasmine.createSpy(),
       },
     },
   }, override);
