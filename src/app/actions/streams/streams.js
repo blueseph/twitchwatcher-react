@@ -6,9 +6,9 @@ export function fetch(options = {}) {
   return dispatch => {
     dispatch({ type: types.FETCH_STREAMS_REQUEST });
     utils.twitchEndpointFinder(utils.endpoints.streams)
-    .then(endpoint => utils.getTwitchData(endpoint, options))
-    .then(streams => dispatch({ type: types.FETCH_STREAMS_SUCCESS, data: streams.streams }))
-    .catch(() => dispatch({ type: types.FETCH_STREAMS_FAILURE }));
+      .then(endpoint => utils.getTwitchData(endpoint, options))
+      .then(streams => dispatch({ type: types.FETCH_STREAMS_SUCCESS, data: streams.streams }))
+      .catch(() => dispatch({ type: types.FETCH_STREAMS_FAILURE }));
   };
 }
 
@@ -22,4 +22,15 @@ export function hideStreams() {
 
 export function selectStream(stream) {
   return { type: aTypes.SELECT_STREAM, stream };
+}
+
+export function searchFor(term, options = {}) {
+  return dispatch => {
+    dispatch({ type: types.UPDATE_STREAMS_REQUEST });
+    utils.twitchEndpointFinder(utils.endpoints.search)
+      .then(endpoint => utils.twitchEndpointFinder(utils.search.streams, endpoint))
+      .then(endpoint => utils.getTwitchData(endpoint, { q: term, ...options }))
+      .then(streams => dispatch({ type: types.UPDATE_STREAMS_SUCCESS, data: streams.streams }))
+      .catch(() => dispatch({ type: types.UPDATE_STREAMS_FAILURE }));
+  };
 }

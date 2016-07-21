@@ -65,4 +65,32 @@ describe('filter actions', () => {
       store.dispatch(actions.fetch());
     });
   });
+
+  describe('update', () => {
+    it('should create a UPDATE_STREAMS_SUCCESS when fetching games is successful', done => {
+      const streams = { streams: [{ channel: { display_name: 'Sodapoppin' } }] };
+      spyOn(utils, 'twitchEndpointFinder').and.returnValue(Promise.resolve('doesnt matter'));
+      spyOn(utils, 'getTwitchData').and.returnValue(Promise.resolve(streams));
+
+      const expectedActions = [
+        { type: types.UPDATE_STREAMS_REQUEST },
+        { type: types.UPDATE_STREAMS_SUCCESS, data: streams.streams },
+      ];
+
+      const store = mockStore({}, expectedActions, done, expect);
+      store.dispatch(actions.searchFor());
+    });
+
+    it('should create a FETCH_STREAMS_FAILURE when fetching games fails', done => {
+      spyOn(utils, 'twitchEndpointFinder').and.returnValue(Promise.reject());
+
+      const expectedActions = [
+        { type: types.UPDATE_STREAMS_REQUEST },
+        { type: types.UPDATE_STREAMS_FAILURE },
+      ];
+
+      const store = mockStore({}, expectedActions, done, expect);
+      store.dispatch(actions.searchFor());
+    });
+  });
 });

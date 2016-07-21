@@ -6,14 +6,12 @@ import { StreamPanel } from '../components/streamPanel/StreamPanel';
 
 import * as StreamActions from '../actions/streams/streams';
 import * as FilterActions from '../actions/filters/filters';
-import * as GamesActions from '../actions/games/games';
 
 const TwitchWatcher = ({
   dispatch,
   actions,
   streams,
   filter,
-  games,
   selected,
 }) =>
   <div className="twitchwatcher">
@@ -25,7 +23,6 @@ const TwitchWatcher = ({
       streams={streams}
       filter={filter}
       dispatch={dispatch}
-      games={games}
     />
   </div>;
 
@@ -34,7 +31,6 @@ TwitchWatcher.propTypes = {
   streams: PropTypes.object.isRequired,
   actions: PropTypes.object.isRequired,
   filter: PropTypes.object.isRequired,
-  games: PropTypes.object.isRequired,
   selected: PropTypes.object.isRequired,
 };
 
@@ -50,7 +46,6 @@ function mapDispatchToProps(dispatch) {
     actions: {
       stream: bindActionCreators(StreamActions, dispatch),
       filter: bindActionCreators(FilterActions, dispatch),
-      games: bindActionCreators(GamesActions, dispatch),
     },
   };
 }

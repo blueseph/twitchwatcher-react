@@ -49,10 +49,9 @@ class Streams extends Component {
 
   render() {
     const { actions, dispatch } = this.props;
-    const { filter } = actions;
 
     return (<div className={this.renderClasses()}>
-      <FilterBar actions={filter} dispatch={dispatch} />
+      <FilterBar actions={actions} dispatch={dispatch} />
       <ul className="streams"> {this.renderStreams()} </ul>
     </div>);
   }

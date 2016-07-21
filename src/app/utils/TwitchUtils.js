@@ -16,8 +16,13 @@ export const endpoints = {
   search: 'search',
 };
 
-export function twitchEndpointFinder(endpoint) {
-  return fetch(baseUrl)
+export const search = {
+  streams: 'search_streams',
+  games: 'search_games',
+};
+
+export function twitchEndpointFinder(endpoint, url = baseUrl) {
+  return fetch(url)
           .then(response => response.json())
           .then(response => response._links[endpoint])
           .catch(err => { throw err; });

@@ -1,4 +1,5 @@
-import { FETCH_STREAMS_REQUEST, FETCH_STREAMS_FAILURE, FETCH_STREAMS_SUCCESS }
+import { FETCH_STREAMS_REQUEST, FETCH_STREAMS_FAILURE, FETCH_STREAMS_SUCCESS,
+         UPDATE_STREAMS_REQUEST, UPDATE_STREAMS_SUCCESS, UPDATE_STREAMS_FAILURE }
       from '../../constants/RequestTypes';
 import { SHOW_STREAMS, HIDE_STREAMS } from '../../constants/ActionTypes';
 
@@ -7,6 +8,7 @@ const initialState = {
   isFetching: false,
   streamFetchError: true,
   visible: true,
+  isUpdating: false,
   data: [],
 };
 
@@ -35,6 +37,31 @@ export default function streams(state = initialState, action) {
         ...state,
         data: [],
         isFetching: false,
+        streamFetchError: true,
+      };
+    }
+
+    case UPDATE_STREAMS_REQUEST: {
+      return {
+        ...state,
+        isUpdating: true,
+        streamFetchError: false,
+      };
+    }
+
+    case UPDATE_STREAMS_SUCCESS: {
+      return {
+        ...state,
+        data: [...new Set([...state.data, ...action.data])],
+        isUpdating: false,
+        streamFetchError: false,
+      };
+    }
+
+    case UPDATE_STREAMS_FAILURE: {
+      return {
+        ...state,
+        isUpdating: false,
         streamFetchError: true,
       };
     }

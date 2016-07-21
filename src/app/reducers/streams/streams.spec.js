@@ -10,6 +10,7 @@ describe('streams reducer', () => {
   it('should return a default state', () => {
     const defaultState = {
       isFetching: false,
+      isUpdating: false,
       streamFetchError: true,
       visible: true,
       data: [],
@@ -26,6 +27,7 @@ describe('streams reducer', () => {
     const expectedState = {
       data: [],
       isFetching: true,
+      isUpdating: false,
       streamFetchError: false,
       visible: true,
     };
@@ -43,6 +45,7 @@ describe('streams reducer', () => {
 
     const expectedState = {
       isFetching: false,
+      isUpdating: false,
       streamFetchError: false,
       data: fetchedStreams,
       visible: true,
@@ -59,12 +62,73 @@ describe('streams reducer', () => {
     const expectedState = {
       data: [],
       isFetching: false,
+      isUpdating: false,
       streamFetchError: true,
       visible: true,
     };
 
     expect(streams(undefined, action)).toEqual(expectedState);
   });
+
+  it('should handle a UPDATE_STREAMS_REQUEST action', () => {
+    const action = {
+      type: types.UPDATE_STREAMS_REQUEST,
+    };
+
+    const expectedState = {
+      data: [],
+      isUpdating: true,
+      streamFetchError: false,
+      isFetching: false,
+      visible: true,
+    };
+
+    expect(streams(undefined, action)).toEqual(expectedState);
+  });
+
+  it('should handle a UPDATE_STREAMS_SUCCESS action', () => {
+    const previousStreams = [{ channel: { display_name: 'Sodapoppin' } }];
+    const fetchedStreams = [{ channel: { display_name: 'LIRIK' } }];
+
+    const action = {
+      type: types.UPDATE_STREAMS_SUCCESS,
+      data: fetchedStreams,
+    };
+
+    const previousState = {
+      data: previousStreams,
+      isFetching: false,
+      isUpdating: false,
+      streamFetchError: false,
+      visible: true,
+    };
+
+    const expectedState = {
+      isFetching: false,
+      isUpdating: false,
+      streamFetchError: false,
+      data: [...previousStreams, ...fetchedStreams],
+      visible: true,
+    };
+
+    expect(streams(previousState, action)).toEqual(expectedState);
+  });
+
+  it('should handle a UPDATE_STREAMS_FAILURE action', () => {
+    const action = {
+      type: types.UPDATE_STREAMS_FAILURE,
+    };
+    const expectedState = {
+      data: [],
+      isFetching: false,
+      isUpdating: false,
+      streamFetchError: true,
+      visible: true,
+    };
+
+    expect(streams(undefined, action)).toEqual(expectedState);
+  });
+
 
   it('should handle a HIDE_STREAMS action', () => {
     const action = {

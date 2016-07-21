@@ -7,7 +7,12 @@ function setup(override) {
     dispatch: jasmine.createSpy(),
     stream: { visible: true },
     actions: {
-      filter: jasmine.createSpy(),
+      filter: {
+        filter: jasmine.createSpy(),
+      },
+      stream: {
+        searchFor: jasmine.createSpy(),
+      },
     },
   }, override);
 
@@ -35,7 +40,10 @@ describe('filter component', () => {
     wrapper.ref('filter').get(0).value = 'AGDQ';
     wrapper.ref('filter').simulate('change', { target: { value: 'AGDQ' } });
 
-    expect(props.dispatch).toHaveBeenCalled();
-    expect(props.actions.filter).toHaveBeenCalledWith('AGDQ');
+    setTimeout(() => {
+      expect(props.dispatch).toHaveBeenCalled();
+      expect(props.actions.filter.filter).toHaveBeenCalledWith('AGDQ');
+      expect(props.actions.stream.searchFor).toHaveBeenCalledWith('AGDQ');
+    }, 600);
   });
 });
