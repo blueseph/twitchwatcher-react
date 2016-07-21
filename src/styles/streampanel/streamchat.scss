@@ -9,3 +9,9 @@
     flex-grow: 1;
   }
 }
+
+.stream-chat.closed {
+  iframe {
+    display: none;
+  }
+}

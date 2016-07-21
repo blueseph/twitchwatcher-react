@@ -4,7 +4,14 @@ import { shallow } from 'enzyme';
 
 function setup(override) {
   const props = Object.assign({}, {
+    actions: {
+      stream: {
+        hideChat: jasmine.createSpy(),
+        showChat: jasmine.createSpy(),
+      },
+    },
     dispatch: jasmine.createSpy(),
+    displayChat: true,
     selected: {
       stream: {
         _id: 123,
@@ -23,7 +30,7 @@ function setup(override) {
   };
 }
 
-describe('streamviewer component', () => {
+describe('stream chat component', () => {
   it('should render itself', () => {
     const { wrapper } = setup();
 
@@ -34,5 +41,23 @@ describe('streamviewer component', () => {
     const { wrapper } = setup({ selected: { stream: 0 } });
 
     expect(wrapper.find('iframe').length).toBe(0);
+  });
+
+  describe('handleClick', () => {
+    it('should handle a click if chat is open', () => {
+      const { wrapper, props } = setup({ displayChat: true });
+
+      wrapper.find('.chat-toggle').simulate('click');
+
+      expect(props.actions.stream.showChat).toHaveBeenCalled();
+    });
+
+    it('should handle a click if chat is closed', () => {
+      const { wrapper, props } = setup({ displayChat: false });
+
+      wrapper.find('.chat-toggle').simulate('click');
+
+      expect(props.actions.stream.showChat).toHaveBeenCalled();
+    });
   });
 });

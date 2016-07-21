@@ -9,6 +9,7 @@ describe('selected reducer', () => {
   it('should return a default state', () => {
     const defaultState = {
       stream: {},
+      displayChat: true,
     };
 
     expect(selected(undefined, {})).toEqual(defaultState);
@@ -21,6 +22,7 @@ describe('selected reducer', () => {
 
     const expectedState = {
       stream: {},
+      displayChat: true,
     };
 
     expect(selected(undefined, action)).toEqual(expectedState);
@@ -33,6 +35,38 @@ describe('selected reducer', () => {
 
     const expectedState = {
       stream: {},
+      displayChat: true,
+    };
+
+    expect(selected(undefined, action)).toEqual(expectedState);
+  });
+
+  it('should handle a SHOW_CHAT action', () => {
+    const intialState = {
+      stream: {},
+      displayChat: false,
+    };
+
+    const action = {
+      type: types.SHOW_CHAT,
+    };
+
+    const expectedState = {
+      stream: {},
+      displayChat: true,
+    };
+
+    expect(selected(intialState, action)).toEqual(expectedState);
+  });
+
+  it('should handle a HIDE_CHAT action', () => {
+    const action = {
+      type: types.HIDE_CHAT,
+    };
+
+    const expectedState = {
+      stream: {},
+      displayChat: false,
     };
 
     expect(selected(undefined, action)).toEqual(expectedState);
@@ -48,8 +82,9 @@ describe('selected reducer', () => {
 
     const expectedState = {
       stream,
+      displayChat: true,
     };
 
-    expect(selected({}, action)).toEqual(expectedState);
+    expect(selected(undefined, action)).toEqual(expectedState);
   });
 });

@@ -20,6 +20,14 @@ export function hideStreams() {
   return { type: aTypes.HIDE_STREAMS };
 }
 
+export function hideChat() {
+  return { type: aTypes.HIDE_CHAT };
+}
+
+export function showChat() {
+  return { type: aTypes.SHOW_CHAT };
+}
+
 export function selectStream(stream) {
   return { type: aTypes.SELECT_STREAM, stream };
 }

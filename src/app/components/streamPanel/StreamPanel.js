@@ -8,6 +8,8 @@ import { StreamChat } from './StreamChat';
 
 const StreamPanel = ({
   selected,
+  actions,
+  dispatch,
 }) =>
   <div className="stream-panel">
     <StreamViewer
@@ -15,11 +17,15 @@ const StreamPanel = ({
     />
     <StreamChat
       selected={selected}
+      dispatch={dispatch}
+      actions={actions}
     />
   </div>;
 
 StreamPanel.propTypes = {
   selected: PropTypes.object.isRequired,
+  actions: PropTypes.object.isRequired,
+  dispatch: PropTypes.func.isRequired,
 };
 
 export { StreamPanel };

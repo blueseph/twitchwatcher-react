@@ -26,6 +26,26 @@ describe('filter actions', () => {
     });
   });
 
+  describe('showChat', () => {
+    it('should exist', () => {
+      expect(actions.showChat).toBeDefined();
+    });
+
+    it('should return a SHOW_CHAT action', () => {
+      expect(actions.showChat()).toEqual({ type: aTypes.SHOW_CHAT });
+    });
+  });
+
+  describe('hideChat', () => {
+    it('should exist', () => {
+      expect(actions.hideChat).toBeDefined();
+    });
+
+    it('should return a HIDE_CHAT action', () => {
+      expect(actions.hideChat()).toEqual({ type: aTypes.HIDE_CHAT });
+    });
+  });
+
   describe('selectStream', () => {
     it('should exist', () => {
       expect(actions.selectStream).toBeDefined();

@@ -17,6 +17,8 @@ const TwitchWatcher = ({
   <div className="twitchwatcher">
     <StreamPanel
       selected={selected}
+      actions={actions}
+      dispatch={dispatch}
     />
     <StreamBar
       actions={actions}

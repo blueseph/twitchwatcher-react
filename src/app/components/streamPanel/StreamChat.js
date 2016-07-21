@@ -2,8 +2,37 @@
 /* twitch natively has underscores as ids. nothing we can do */
 
 import React, { Component, PropTypes } from 'react';
+import classnames from 'classnames';
 
 class StreamChat extends Component {
+  constructor(props, context) {
+    super(props, context);
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick() {
+    const { actions, selected, dispatch } = this.props;
+    const { hideChat, showChat } = actions.stream;
+    const { displayChat } = selected;
+
+    const visibility = displayChat ? hideChat : showChat;
+
+    dispatch(visibility());
+  }
+
+  renderClasses() {
+    const { selected } = this.props;
+    const { displayChat } = selected;
+
+    const toggleClass = classnames({
+      'stream-chat': true,
+      open: displayChat,
+      closed: !displayChat,
+    });
+
+    return toggleClass;
+  }
+
   renderStream() {
     const { selected } = this.props;
     const { stream } = selected;
@@ -21,7 +50,13 @@ class StreamChat extends Component {
 
   render() {
     return (
-      <div className="stream-chat">
+      <div className={this.renderClasses()}>
+        <div
+          className="chat-toggle"
+          onClick={this.handleClick}
+        >
+          toggle chat
+        </div>
         {this.renderStream()}
       </div>
     );
@@ -30,6 +65,8 @@ class StreamChat extends Component {
 
 StreamChat.propTypes = {
   selected: PropTypes.object.isRequired,
+  actions: PropTypes.object.isRequired,
+  dispatch: PropTypes.func.isRequired,
 };
 
 export { StreamChat };

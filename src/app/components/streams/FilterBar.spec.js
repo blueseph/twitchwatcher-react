@@ -46,4 +46,17 @@ describe('filter component', () => {
       expect(props.actions.stream.searchFor).toHaveBeenCalledWith('AGDQ');
     }, 600);
   });
+
+  it('shouldnt try to call searched for if theres nothing to filter for', () => {
+    const { wrapper, props } = setup();
+
+    wrapper.ref('filter').get(0).value = '';
+    wrapper.ref('filter').simulate('change', { target: { value: '' } });
+
+    setTimeout(() => {
+      expect(props.dispatch).toHaveBeenCalled();
+      expect(props.actions.filter.filter).toHaveBeenCalled();
+      expect(props.actions.stream.searchFor).not.toHaveBeenCalled();
+    }, 600);
+  });
 });
