@@ -104,6 +104,7 @@ describe('stream bar component', () => {
 
       wrapper.find('.toggle').simulate('click');
       expect(props.actions.stream.showStreams).toHaveBeenCalled();
+      expect(props.actions.stream.fetch).toHaveBeenCalled();
       expect(wrapper.find('.toggle').text()).toEqual('Show');
     });
   });

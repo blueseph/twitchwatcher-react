@@ -21,9 +21,12 @@ class StreamBar extends Component {
     const { showStreams, hideStreams } = stream;
     const { visible } = streams;
 
-    const visibility = visible ? hideStreams : showStreams;
-
-    dispatch(visibility());
+    if (!visible) {
+      this.fetchStreams();
+      dispatch(showStreams());
+    } else {
+      dispatch(hideStreams());
+    }
   }
 
   fetchStreams() {
