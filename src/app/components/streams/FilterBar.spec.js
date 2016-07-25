@@ -34,7 +34,7 @@ describe('filter component', () => {
     expect(wrapper.ref('filter').length).toBe(1);
   });
 
-  it('should handle the onChange event', () => {
+  it('should handle the onChange event', done => {
     const { wrapper, props } = setup();
 
     wrapper.ref('filter').get(0).value = 'AGDQ';
@@ -43,11 +43,12 @@ describe('filter component', () => {
     setTimeout(() => {
       expect(props.dispatch).toHaveBeenCalled();
       expect(props.actions.filter.filter).toHaveBeenCalledWith('AGDQ');
-      expect(props.actions.stream.searchFor).toHaveBeenCalledWith('AGDQ');
+      expect(props.actions.stream.searchFor).toHaveBeenCalled();
+      done();
     }, 600);
   });
 
-  it('shouldnt try to call searched for if theres nothing to filter for', () => {
+  it('shouldnt try to call searched for if theres nothing to filter for', done => {
     const { wrapper, props } = setup();
 
     wrapper.ref('filter').get(0).value = '';
@@ -57,6 +58,7 @@ describe('filter component', () => {
       expect(props.dispatch).toHaveBeenCalled();
       expect(props.actions.filter.filter).toHaveBeenCalled();
       expect(props.actions.stream.searchFor).not.toHaveBeenCalled();
+      done();
     }, 600);
   });
 });
