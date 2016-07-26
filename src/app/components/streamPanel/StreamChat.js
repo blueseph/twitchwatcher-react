@@ -20,12 +20,27 @@ class StreamChat extends Component {
     dispatch(visibility());
   }
 
-  renderClasses() {
+  renderToggle() {
     const { selected } = this.props;
     const { displayChat } = selected;
 
     const toggleClass = classnames({
+      'chat-toggle': true,
+      open: displayChat,
+      closed: !displayChat,
+    });
+
+    return toggleClass;
+  }
+
+  renderClasses() {
+    const { selected } = this.props;
+    const { stream } = selected;
+    const { displayChat } = selected;
+
+    const toggleClass = classnames({
       'stream-chat': true,
+      hidden: !stream.id,
       open: displayChat,
       closed: !displayChat,
     });
@@ -37,22 +52,25 @@ class StreamChat extends Component {
     const { selected } = this.props;
     const { stream } = selected;
 
-    if (!stream._id) { return ''; }
-    return (
-      <iframe
-        frameBorder="0"
-        width="100%"
-        style={{ height: 'calc(100% - 1px)' }}
-        src={`http://twitch.tv/${stream.channel.name}/chat`}
-      />
-    );
+    if (stream._id) {
+      return (
+        <iframe
+          frameBorder="0"
+          width="100%"
+          style={{ height: 'calc(100% - 1px)' }}
+          src={`http://twitch.tv/${stream.channel.name}/chat`}
+        />
+      );
+    }
+
+    return '';
   }
 
   render() {
     return (
       <div className={this.renderClasses()}>
         <div
-          className="chat-toggle"
+          className={this.renderToggle()}
           onClick={this.handleClick}
         >
           toggle chat
