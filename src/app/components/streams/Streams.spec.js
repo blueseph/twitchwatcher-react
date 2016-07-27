@@ -4,7 +4,7 @@ import { shallow } from 'enzyme';
 
 
 function setup(override) {
-  const props = Object.assign({}, {
+  const props = { ...{
     dispatch: jasmine.createSpy(),
     filter: {
       term: '',
@@ -26,7 +26,7 @@ function setup(override) {
         hideStreams: jasmine.createSpy(),
       },
     },
-  }, override);
+  }, ...override };
 
   const wrapper = shallow(<Streams {...props} />);
 

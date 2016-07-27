@@ -3,7 +3,7 @@ import { StreamChat } from './StreamChat';
 import { shallow } from 'enzyme';
 
 function setup(override) {
-  const props = Object.assign({}, {
+  const props = { ...{
     actions: {
       stream: {
         hideChat: jasmine.createSpy(),
@@ -20,7 +20,7 @@ function setup(override) {
         },
       },
     },
-  }, override);
+  }, ...override };
 
   const wrapper = shallow(<StreamChat {...props} />);
 

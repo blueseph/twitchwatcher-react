@@ -3,7 +3,7 @@ import { FilterBar } from './FilterBar';
 import { mount } from 'enzyme';
 
 function setup(override) {
-  const props = Object.assign({}, {
+  const props = { ...{
     dispatch: jasmine.createSpy(),
     stream: { visible: true },
     actions: {
@@ -14,7 +14,7 @@ function setup(override) {
         searchFor: jasmine.createSpy(),
       },
     },
-  }, override);
+  }, ...override };
 
   const wrapper = mount(<FilterBar {...props} />);
 

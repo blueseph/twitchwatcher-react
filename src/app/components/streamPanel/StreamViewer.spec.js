@@ -3,7 +3,7 @@ import { StreamViewer } from './StreamViewer';
 import { shallow } from 'enzyme';
 
 function setup(override) {
-  const props = Object.assign({}, {
+  const props = { ...{
     dispatch: jasmine.createSpy(),
     selected: {
       stream: {
@@ -13,7 +13,7 @@ function setup(override) {
         },
       },
     },
-  }, override);
+  }, ...override };
 
   const wrapper = shallow(<StreamViewer {...props} />);
 

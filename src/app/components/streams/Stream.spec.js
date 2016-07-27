@@ -3,7 +3,7 @@ import { Stream } from './Stream';
 import { mount } from 'enzyme';
 
 function setup(override) {
-  const props = Object.assign({}, {
+  const props = { ...{
     dispatch: jasmine.createSpy(),
     stream: {
       preview: {
@@ -19,7 +19,7 @@ function setup(override) {
       selectStream: jasmine.createSpy(),
       hideStreams: jasmine.createSpy(),
     },
-  }, override);
+  }, ...override };
 
   const wrapper = mount(<Stream {...props} />);
 

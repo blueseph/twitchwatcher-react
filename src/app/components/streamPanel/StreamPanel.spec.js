@@ -3,8 +3,9 @@ import { StreamPanel } from './StreamPanel';
 import { shallow } from 'enzyme';
 
 function setup(override) {
-  const props = Object.assign({}, {
+  const props = { ...{
     dispatch: jasmine.createSpy(),
+    actions: {},
     selected: {
       stream: {
         _id: 123,
@@ -13,7 +14,7 @@ function setup(override) {
         },
       },
     },
-  }, override);
+  }, ...override };
 
   const wrapper = shallow(<StreamPanel {...props} />);
 
