@@ -1,6 +1,6 @@
 import React from 'react';
 import { StreamPanel } from './StreamPanel';
-import { shallow } from 'enzyme';
+import { mount } from 'enzyme';
 
 function setup(override) {
   const props = { ...{
@@ -16,7 +16,7 @@ function setup(override) {
     },
   }, ...override };
 
-  const wrapper = shallow(<StreamPanel {...props} />);
+  const wrapper = mount(<StreamPanel {...props} />);
 
   return {
     props,
@@ -28,7 +28,13 @@ describe('stream panel component', () => {
   it('should render itself', () => {
     const { wrapper } = setup();
 
-    expect(wrapper.find('div').length).toBe(2);
+    expect(wrapper.find('div').length).toBe(5);
     expect(wrapper.find('div').first().hasClass('stream-panel')).toBe(true);
+  });
+
+  it('should return an empty state if no stream is passed to it', () => {
+    const { wrapper } = setup({ selected: { stream: undefined } });
+
+    expect(wrapper.find('div').find('.empty-state').length).toBe(1);
   });
 });
