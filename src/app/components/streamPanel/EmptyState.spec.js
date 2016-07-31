@@ -14,7 +14,7 @@ describe('emptystate component', () => {
   it('should render itself', () => {
     const { wrapper } = setup();
 
-    expect(wrapper.find('div').length).toBe(5);
-    expect(wrapper.find('.hero').length).toBe(1);
+    expect(wrapper.find('div').length).toBe(2);
+    expect(wrapper.find('.start-hint').length).toBe(1);
   });
 });

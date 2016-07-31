@@ -19,9 +19,10 @@
   animation-delay: -0.32s;
 }
 .loader {
+  max-height: 80px;
   color: #235f18;
   text-indent: -9999em;
-  margin: 88px auto;
+  margin: 75px auto;
   position: relative;
   font-size: 11px;
   -webkit-transform: translateZ(0);

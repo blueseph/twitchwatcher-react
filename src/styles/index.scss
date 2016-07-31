@@ -4,16 +4,14 @@ body {
   height:100vh;
   width: 100vw;
 
-  display: flex;
-  flex-direction: column;
-
   font-family: 'Cardo', serif;
 }
 
 .twitchwatcher {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   height: 100vh;
+  width: 100vw;
   overflow: hidden;
   flex-grow: 1;
 }

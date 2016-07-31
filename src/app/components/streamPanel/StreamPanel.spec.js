@@ -24,11 +24,11 @@ function setup(override) {
   };
 }
 
-describe('streamviewer component', () => {
+describe('stream panel component', () => {
   it('should render itself', () => {
     const { wrapper } = setup();
 
-    expect(wrapper.find('div').length).toBe(1);
-    expect(wrapper.find('div').hasClass('stream-panel')).toBe(true);
+    expect(wrapper.find('div').length).toBe(2);
+    expect(wrapper.find('div').first().hasClass('stream-panel')).toBe(true);
   });
 });

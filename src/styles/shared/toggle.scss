@@ -1,0 +1,42 @@
+.toggle {
+  background: #235f18;
+  color: white;
+  padding: 15px 20px;
+  font-size: 1em;
+  font-family: 'Montserrat', sans-serif;
+  text-align: center;
+  cursor: pointer;
+  transition: all 180ms;
+}
+
+.toggle.closed {
+  span {
+    -moz-animation: hideSelf 0s ease-in 3s forwards;
+    /* Firefox */
+    -webkit-animation: hideSelf 0s ease-in 3s forwards;
+    /* Safari and Chrome */
+    -o-animation: hideSelf 0s ease-in 3s forwards;
+    /* Opera */
+    animation: hideSelf 0s ease-in 3s forwards;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+  }
+}
+
+@keyframes hideSelf {
+  to {
+    padding: 0;
+    opacity: 0;
+    height: 0;
+    width: 0;
+  }
+}
+
+@-webkit-keyframes hideSelf {
+  to {
+    padding: 0;
+    opacity: 0;
+    height: 0;
+    width: 0;
+  }
+}

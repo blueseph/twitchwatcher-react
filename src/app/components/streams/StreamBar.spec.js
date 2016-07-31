@@ -95,17 +95,19 @@ describe('stream bar component', () => {
       const { props, wrapper } = setup({ streams: { visible: true } });
 
       wrapper.find('.toggle').simulate('click');
+
+      expect(wrapper.find('.toggle').find('span').hasClass('icon-circle-down')).toEqual(true);
       expect(props.actions.stream.hideStreams).toHaveBeenCalled();
-      expect(wrapper.find('.toggle').text()).toEqual('Hide');
     });
 
     it('should show if hidden', () => {
       const { props, wrapper } = setup({ streams: { visible: false } });
 
       wrapper.find('.toggle').simulate('click');
+
+      expect(wrapper.find('.toggle').find('span').hasClass('icon-circle-up')).toEqual(true);
       expect(props.actions.stream.showStreams).toHaveBeenCalled();
       expect(props.actions.stream.fetch).toHaveBeenCalled();
-      expect(wrapper.find('.toggle').text()).toEqual('Show');
     });
   });
 });

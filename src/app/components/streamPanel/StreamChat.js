@@ -20,27 +20,34 @@ class StreamChat extends Component {
     dispatch(visibility());
   }
 
-  renderToggle() {
+  renderToggleClass() {
     const { selected } = this.props;
-    const { displayChat } = selected;
+    const { displayChat, stream } = selected;
 
     const toggleClass = classnames({
-      'chat-toggle': true,
+      toggle: true,
       open: displayChat,
       closed: !displayChat,
+      hidden: !stream._id,
     });
 
     return toggleClass;
   }
 
+  renderToggle() {
+    const { selected } = this.props;
+    const { displayChat } = selected;
+
+    return `icon-circle-${displayChat ? 'right' : 'left'}`;
+  }
+
   renderClasses() {
     const { selected } = this.props;
-    const { stream } = selected;
-    const { displayChat } = selected;
+    const { stream, displayChat } = selected;
 
     const toggleClass = classnames({
       'stream-chat': true,
-      hidden: !stream.id,
+      hidden: !stream._id,
       open: displayChat,
       closed: !displayChat,
     });
@@ -70,10 +77,10 @@ class StreamChat extends Component {
     return (
       <div className={this.renderClasses()}>
         <div
-          className={this.renderToggle()}
+          className={this.renderToggleClass()}
           onClick={this.handleClick}
         >
-          toggle chat
+          <span className={this.renderToggle()}></span>
         </div>
         {this.renderStream()}
       </div>

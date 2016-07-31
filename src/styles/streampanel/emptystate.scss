@@ -1,0 +1,36 @@
+.empty-state {
+  text-rendering: optimizeLegibility;
+  width: 100vw;
+  height: 100%;
+  padding-top: 5em;
+  h1 {
+    font-size: 4em;
+    text-align: center;
+    line-height: .7em;
+    margin: .5em;
+  }
+
+  h5 {
+    font-size: 1.6em;
+    font-weight: 200;
+    text-align: center;
+  }
+
+  .start-hint {
+    position: fixed;
+    bottom: 13rem;
+    right: 26rem;
+    font-size: 1.4em;
+
+    p {
+      margin-right: 1em;
+      display: inline;
+    }
+
+  }
+}
+
+.text-highlight {
+  color: #235f18;
+  font-weight: bold;
+}

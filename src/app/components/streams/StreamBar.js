@@ -50,14 +50,14 @@ class StreamBar extends Component {
     const { streams } = this.props;
     const { visible } = streams;
 
-    return visible ? 'Hide' : 'Show';
+    return `icon-circle-${visible ? 'down' : 'up'}`;
   }
 
   render() {
     return (
       <div className="stream-bar">
         <div className={this.renderClasses()} onClick={this.handleClick}>
-          {this.renderToggle()}
+          <span className={this.renderToggle()}></span>
         </div>
         <Streams {...this.props} />
       </div>

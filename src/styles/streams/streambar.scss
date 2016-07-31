@@ -1,26 +1,55 @@
 .stream-bar {
-  order: -1;
-  flex: 0;
-  height: 100vh;
+  order: 2;
   transition: all 1000ms;
+  width: 100vw;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+  position: relative;
 
   .toggle {
-    background: #235f18;
-    color: white;
-    padding: 25px;
-    font-size: 2em;
-    font-family: 'Montserrat', sans-serif;
-    text-align: center;
-    cursor: pointer;
-    transition: all 180ms;
+    position: fixed;
+    right: .5em;
+    bottom: 13rem;
+    z-index: 9999;
   }
 
   .toggle.closed {
-    position: absolute;
-    left: calc(-4em);
-  }
+    position: fixed;
+    top: auto;
+    right: .5em;
+    bottom: .5em;
 
-  .toggle.closed:hover {
-    left: 0;
+    -moz-animation: setBoxLong 200ms ease-in 3s forwards;
+    /* Firefox */
+    -webkit-animation: setBoxLong 200ms ease-in 3s forwards;
+    /* Safari and Chrome */
+    -o-animation: setBoxLong 200ms ease-in 3s forwards;
+    /* Opera */
+    animation: setBoxLong 200ms ease-in 3s forwards;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+  }
+}
+
+.stream-bar.closed {
+  overflow-x: hidden;
+}
+
+@keyframes setBoxLong {
+  to {
+    padding: 0;
+    width: 59px;
+    height: 25px;
+    overflow: hidden;
+  }
+}
+
+@-webkit-keyframes setBoxLong {
+  to {
+    padding: 0;
+    width: 59px;
+    height: 25px;
+    overflow: hidden;
   }
 }

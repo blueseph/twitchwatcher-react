@@ -1,20 +1,13 @@
 import React from 'react';
 
 const EmptyState = () =>
-  <div>
+  <div className="empty-state">
     <h1>Twitch Watcher</h1>
-    <h5>A simple way to watch twitch.</h5>
+    <h5>A simpler way to watch twitch.</h5>
 
-    <div className="hero">
-      <div className="streamer">
-        <p>Choose your favorite streamer</p>
-      </div>
-      <div className="divider">
-        OR
-      </div>
-      <div className="game">
-        <p>Choose your favorite game</p>
-      </div>
+    <div className="start-hint">
+      <p>Start here. Try searching for <span className="text-highlight">Dota 2.</span></p>
+      <img src="/media/images/right-curve-arrow.svg" role="presentation" height="35px" />
     </div>
   </div>;
 
