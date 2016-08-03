@@ -3,12 +3,15 @@ import * as aTypes from '../../constants/ActionTypes';
 import * as utils from '../../utils/TwitchUtils';
 
 export function fetch(options = {}) {
-  return dispatch => {
+  return async dispatch => {
     dispatch({ type: types.FETCH_STREAMS_REQUEST });
-    utils.twitchEndpointFinder(utils.endpoints.streams)
-      .then(endpoint => utils.getTwitchData(endpoint, options))
-      .then(streams => dispatch({ type: types.FETCH_STREAMS_SUCCESS, data: streams.streams }))
-      .catch(() => dispatch({ type: types.FETCH_STREAMS_FAILURE }));
+    const endpoint = await utils.twitchEndpointFinder(utils.endpoints.streams);
+    try {
+      const streams = await utils.getTwitchData(endpoint, options);
+      dispatch({ type: types.FETCH_STREAMS_SUCCESS, data: streams.streams });
+    } catch (err) {
+      dispatch({ type: types.FETCH_STREAMS_FAILURE });
+    }
   };
 }
 
@@ -33,12 +36,15 @@ export function selectStream(stream) {
 }
 
 export function searchFor(term, options = {}) {
-  return dispatch => {
+  return async dispatch => {
     dispatch({ type: types.UPDATE_STREAMS_REQUEST });
-    utils.twitchEndpointFinder(utils.endpoints.search)
-      .then(endpoint => utils.twitchEndpointFinder(utils.search.streams, endpoint))
-      .then(endpoint => utils.getTwitchData(endpoint, { q: term, ...options }))
-      .then(streams => dispatch({ type: types.UPDATE_STREAMS_SUCCESS, data: streams.streams }))
-      .catch(() => dispatch({ type: types.UPDATE_STREAMS_FAILURE }));
+    try {
+      const endpoint = await utils.twitchEndpointFinder(utils.endpoints.search);
+      const searchEndpoint = await utils.twitchEndpointFinder(utils.search.streams, endpoint);
+      const streams = await utils.getTwitchData(searchEndpoint, { q: term, ...options });
+      dispatch({ type: types.UPDATE_STREAMS_SUCCESS, data: streams.streams });
+    } catch (err) {
+      dispatch({ type: types.UPDATE_STREAMS_FAILURE });
+    }
   };
 }

@@ -30,7 +30,11 @@ class StreamBar extends Component {
   }
 
   fetchStreams() {
-    this.props.actions.stream.fetch({ limit: 100 });
+    const { actions } = this.props;
+    const { stream } = actions;
+    const { fetch } = stream;
+
+    fetch({ limit: 100 });
   }
 
   renderClasses() {

@@ -1,4 +1,7 @@
+/* eslint no-unused-expressions: ["error", { "allowShortCircuit": true }] */
+
 import * as utils from './TwitchUtils';
+import { testAsync } from './TestUtils';
 
 describe('Twitch Utilities', () => {
   describe('parameterize object', () => {
@@ -32,23 +35,29 @@ describe('Twitch Utilities', () => {
       expect(utils.twitchEndpointFinder).toBeDefined();
     });
 
-    it('should return an endpoint', () => {
-      spyOn(window, 'fetch').and.returnValue(Promise.resolve(endpoints));
-      const requested = 'streams';
+    it('should return an endpoint', testAsync(async () => {
+      spyOn(window, 'fetch').and.returnValue(
+        new Promise(resolve =>
+          resolve({
+            json() {
+              return {
+                _links: endpoints,
+              };
+            },
+          })
+        )
+      );
 
-      utils.twitchEndpointFinder(requested).then(res => {
-        expect(res).toEqual(endpoints[requested]);
-      });
-    });
+      const requested = 'streams';
+      const response = await utils.twitchEndpointFinder(requested);
+      expect(response).toEqual(endpoints[requested]);
+    }));
 
     it('should throw an error on failure', () => {
-      const error = 'it broke';
-      spyOn(window, 'fetch').and.returnValue(Promise.reject(error));
+      spyOn(window, 'fetch').and.returnValue(new Error());
       const requested = 'streams';
 
-      utils.twitchEndpointFinder(requested).catch(err => {
-        expect(err).toEqual(error);
-      });
+      expect(async () => utils.twitchEndpointFinder(requested).toThrow(new Error()));
     });
   });
 
@@ -65,54 +74,26 @@ describe('Twitch Utilities', () => {
       expect(utils.getTwitchData()).toBeDefined();
     });
 
-    it('should get streams data', () => {
+    it('should get streams data', testAsync(async () => {
       const streams = [{ channel: { display_name: 'Voyboy' } }];
-      spyOn(window, 'fetch').and.returnValue(Promise.resolve(streams));
+      spyOn(window, 'fetch').and.returnValue(
+        new Promise(resolve =>
+          resolve({
+            json() {
+              return streams;
+            },
+          })
+        )
+      );
 
-      utils.getTwitchData(endpoints.streams).then(res => {
-        expect(res).toEqual(streams);
-      });
-    });
-
-    it('should throw an error on failure', () => {
-      const error = 'it broke';
-      spyOn(window, 'fetch').and.returnValue(Promise.reject(error));
-
-      utils.getTwitchData(endpoints.streams).catch(err => {
-        expect(err).toEqual(error);
-      });
-    });
-  });
-
-  describe('get games data', () => {
-    let endpoints;
-
-    beforeEach(() => {
-      endpoints = {
-        games: 'https://api.twitch.tv/kraken/games/top/',
-      };
-    });
-
-    it('should exist', () => {
-      expect(utils.getGamesData()).toBeDefined();
-    });
-
-    it('should get streams data', () => {
-      const games = { top: [{ game: { name: 'Overwatch' } }] };
-      spyOn(window, 'fetch').and.returnValue(Promise.resolve(games));
-
-      utils.getGamesData(endpoints.games).then(res => {
-        expect(res).toEqual(games);
-      });
-    });
+      const response = await utils.getTwitchData(endpoints.streams);
+      expect(response).toEqual(streams);
+    }));
 
     it('should throw an error on failure', () => {
-      const error = 'it broke';
-      spyOn(window, 'fetch').and.returnValue(Promise.reject(error));
+      spyOn(window, 'fetch').and.returnValue(new Error());
 
-      utils.getGamesData(endpoints.games).catch(err => {
-        expect(err).toEqual(error);
-      });
+      expect(async () => utils.getTwitchData(endpoints.streams).toThrow(new Error()));
     });
   });
 });

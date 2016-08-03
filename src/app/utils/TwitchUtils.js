@@ -21,26 +21,16 @@ export const search = {
   games: 'search_games',
 };
 
-export function twitchEndpointFinder(endpoint, url = baseUrl) {
-  return fetch(url)
-          .then(response => response.json())
-          .then(response => response._links[endpoint])
-          .catch(err => { throw err; });
+export async function twitchEndpointFinder(endpoint, url = baseUrl) {
+  const twitchEndpoints = await fetch(url);
+  const twitchEndpointsJSON = await twitchEndpoints.json();
+  return twitchEndpointsJSON._links[endpoint];
 }
 
-export function getTwitchData(endpoint, options = {}) {
+export async function getTwitchData(endpoint, options = {}) {
   const params = parameterizeOptions(options);
 
-  return fetch(`${endpoint}?${params}`)
-          .then(response => response.json())
-          .catch(err => { throw err; });
-}
-
-export function getGamesData(options = {}) {
-  const params = parameterizeOptions(options);
-
-    // alright so apparently this is tucked away so no one can ever find it thanks twitch/
-  return fetch(`${baseUrl}/games/top?${params}`)
-          .then(response => response.json())
-          .catch(err => { throw err; });
+  const data = await fetch(`${endpoint}?${params}`);
+  const json = await data.json();
+  return json;
 }

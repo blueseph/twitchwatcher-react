@@ -5,7 +5,7 @@ import * as utils from '../../utils/TwitchUtils';
 import { mockStore } from '../../utils/TestUtils';
 
 
-describe('filter actions', () => {
+describe('stream actions', () => {
   describe('hideStreams', () => {
     it('should exist', () => {
       expect(actions.hideStreams).toBeDefined();
@@ -61,8 +61,8 @@ describe('filter actions', () => {
   describe('fetch', () => {
     it('should create a FETCH_STREAMS_SUCCESS when fetching games is successful', done => {
       const streams = { streams: [{ channel: { display_name: 'Sodapoppin' } }] };
-      spyOn(utils, 'twitchEndpointFinder').and.returnValue(Promise.resolve('doesnt matter'));
-      spyOn(utils, 'getTwitchData').and.returnValue(Promise.resolve(streams));
+      spyOn(utils, 'twitchEndpointFinder').and.returnValue('doesnt matter');
+      spyOn(utils, 'getTwitchData').and.returnValue(streams);
 
       const expectedActions = [
         { type: types.FETCH_STREAMS_REQUEST },
@@ -74,7 +74,7 @@ describe('filter actions', () => {
     });
 
     it('should create a FETCH_STREAMS_FAILURE when fetching games fails', done => {
-      spyOn(utils, 'twitchEndpointFinder').and.returnValue(Promise.reject());
+      spyOn(utils, 'twitchEndpointFinder').and.returnValue(new Error());
 
       const expectedActions = [
         { type: types.FETCH_STREAMS_REQUEST },
@@ -89,8 +89,8 @@ describe('filter actions', () => {
   describe('update', () => {
     it('should create a UPDATE_STREAMS_SUCCESS when fetching games is successful', done => {
       const streams = { streams: [{ channel: { display_name: 'Sodapoppin' } }] };
-      spyOn(utils, 'twitchEndpointFinder').and.returnValue(Promise.resolve('doesnt matter'));
-      spyOn(utils, 'getTwitchData').and.returnValue(Promise.resolve(streams));
+      spyOn(utils, 'twitchEndpointFinder').and.returnValue('doesnt matter');
+      spyOn(utils, 'getTwitchData').and.returnValue(streams);
 
       const expectedActions = [
         { type: types.UPDATE_STREAMS_REQUEST },
@@ -102,7 +102,7 @@ describe('filter actions', () => {
     });
 
     it('should create a FETCH_STREAMS_FAILURE when fetching games fails', done => {
-      spyOn(utils, 'twitchEndpointFinder').and.returnValue(Promise.reject());
+      spyOn(utils, 'twitchEndpointFinder').and.returnValue(new Error());
 
       const expectedActions = [
         { type: types.UPDATE_STREAMS_REQUEST },

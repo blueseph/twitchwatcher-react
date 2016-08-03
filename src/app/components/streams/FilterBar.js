@@ -13,7 +13,7 @@ class FilterBar extends Component {
 
     dispatch(filter.filter(this.refs.filter.value));
     if (this.refs.filter.value.length) {
-      dispatch(stream.searchFor(this.refs.filter.value, { limit: 100 }));
+      stream.searchFor(this.refs.filter.value, { limit: 100 });
     }
   }
 
