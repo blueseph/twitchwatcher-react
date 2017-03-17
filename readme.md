@@ -10,8 +10,5 @@ A one-page app designed to make switching between streams as simple as possible.
 * Filter by streamer name, channel status, or game.
 * Show or hide Twitch Chat.
 * All streams served in HTML5.
-* (COMING SOON) Watch multiple streams at once.
-
-See it working at http://savingthrow.io. (temporary)
 
 Please note this will *not* work via https. Twitch doesn't support serving streams over https yet.
